@@ -1,0 +1,11 @@
+CREATE TABLE `chequeprint`.`checkprintedDetails` (
+  `micrNum` INTEGER UNSIGNED NOT NULL,
+  `bank` VARCHAR(45) NOT NULL,
+  `timpstamp` TIMESTAMP NOT NULL
+)
+ENGINE = InnoDB;
+
+
+ALTER TABLE `chequeprint`.`checkprintedDetails` MODIFY COLUMN `micrNum` INTEGER UNSIGNED DEFAULT NULL;
+
+ALTER TABLE `chequeprint`.`bankaddress` ADD COLUMN `status` BOOLEAN NOT NULL DEFAULT 1 AFTER `AcHoldercode`;
