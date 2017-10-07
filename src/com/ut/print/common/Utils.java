@@ -10,8 +10,6 @@ import javax.swing.ImageIcon;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ut.print.check.Print;
-
 public class Utils {
 	private static final Log LOG = LogFactory.getLog("Utils");
 	private static List<BufferedImage> imageList;
