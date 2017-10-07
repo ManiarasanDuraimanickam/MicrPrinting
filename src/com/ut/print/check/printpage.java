@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.net.URL;
+
 import javax.swing.ImageIcon;
 
 class printpage implements Printable {
