@@ -14,21 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import com.ut.print.ComponentFactory;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
-@Component
-@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class AddNewBank extends AbstractPage {
 	/**
 	 * 
@@ -81,19 +74,14 @@ public class AddNewBank extends AbstractPage {
 	private Print print;
 
 	public AddNewBank() {
-		/*
-		 * commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class); print
-		 * = ComponentFactory.getBeanByType(Print.class); initComponents();
-		 * TitleImage(); GetBankList();
-		 */
+		initComponents();
+		TitleImage();
 	}
 
 	@Override
 	protected void initPage() {
 		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
-		print = ComponentFactory.getBeanByType(Print.class);
-		initComponents();
-		TitleImage();
+		print = new Print();
 		GetBankList();
 	}
 
@@ -199,28 +187,28 @@ public class AddNewBank extends AbstractPage {
 		this.jPanel2.setForeground(new Color(255, 255, 255));
 
 		this.Savebankdetail.setBackground(new Color(153, 153, 153));
-		this.Savebankdetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/save.png")));
+		this.Savebankdetail.setIcon(Utils.getImageIcon("/iMAGE/save.png"));
 		this.Savebankdetail.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				AddNewBank.this.SavebankdetailActionPerformed(evt);
 			}
 
 		});
-		this.btnupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/48x48-update.png")));
+		this.btnupdate.setIcon(Utils.getImageIcon("/iMAGE/48x48-update.png"));
 		this.btnupdate.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				AddNewBank.this.btnupdateActionPerformed(evt);
 			}
 
 		});
-		this.BankDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/Delete.png")));
+		this.BankDelete.setIcon(Utils.getImageIcon("/iMAGE/Delete.png"));
 		this.BankDelete.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				AddNewBank.this.BankDeleteActionPerformed(evt);
 			}
 
 		});
-		this.backbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/backImg.png")));
+		this.backbtn.setIcon(Utils.getImageIcon("/iMAGE/backImg.png"));
 		this.backbtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				AddNewBank.this.backbtnActionPerformed(evt);

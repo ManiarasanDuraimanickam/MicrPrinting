@@ -37,8 +37,6 @@ import com.ut.print.check.print.PrintChequeNo;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
-@Component
-@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PrepareAlternate extends AbstractPage {
 	/**
 	 * 
@@ -135,17 +133,13 @@ public class PrepareAlternate extends AbstractPage {
 	private CommonJDBCRepo commonJDBCRepo;
 
 	public PrepareAlternate() {
-		/*
-		 * commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
-		 * initComponents(); TitleImage(); getBankList();
-		 */
+		initComponents();
+		TitleImage();
 	}
 
 	@Override
 	protected void initPage() {
 		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
-		initComponents();
-		TitleImage();
 		getBankList();
 	}
 

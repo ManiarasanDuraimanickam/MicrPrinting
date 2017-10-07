@@ -28,8 +28,6 @@ import com.ut.print.ComponentFactory;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
-@Repository
-// @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Login extends AbstractPage {
 	/**
 	 * 

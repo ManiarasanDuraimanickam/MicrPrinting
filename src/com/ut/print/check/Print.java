@@ -36,8 +36,6 @@ import com.ut.print.check.print.PrintChequeNo;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
-@Component
-@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Print extends AbstractPage {
 	/**
 	 * 
@@ -104,13 +102,13 @@ public class Print extends AbstractPage {
 
 	private CommonJDBCRepo commonJDBCRepo;
 
-	@Autowired
+	
 	private PositionAlignment_setting alignment_setting;
 
-	@Autowired
+	
 	private AddNewBank addNewBank;
 
-	@Autowired
+	
 	private PrepareAlternate prepareAlternate;
 
 	public Print() {
@@ -121,9 +119,9 @@ public class Print extends AbstractPage {
 
 	protected void initPage() {
 		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
-		alignment_setting = ComponentFactory.getBeanByType(PositionAlignment_setting.class);
-		addNewBank = ComponentFactory.getBeanByType(AddNewBank.class);
-		prepareAlternate = ComponentFactory.getBeanByType(PrepareAlternate.class);
+		alignment_setting = new PositionAlignment_setting();
+		addNewBank = new AddNewBank();
+		prepareAlternate = new PrepareAlternate();
 		initComponents();
 		TitleImage();
 		GetBankList();
@@ -499,10 +497,12 @@ public class Print extends AbstractPage {
 	}
 
 	private void jMenuItem1ActionPerformed(ActionEvent evt) {
-		alignment_setting.setVisible(true);
+		this.alignment_setting.setVisible(true);
+		//dispose();
 	}
 
 	private void jMenuItem2ActionPerformed(ActionEvent evt) {
+		
 		this.addNewBank.setVisible(true);
 		dispose();
 	}

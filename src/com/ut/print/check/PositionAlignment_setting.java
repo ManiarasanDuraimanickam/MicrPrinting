@@ -28,8 +28,6 @@ import org.springframework.stereotype.Component;
 
 import com.ut.print.common.Utils;
 
-@Component
-@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PositionAlignment_setting extends AbstractPage {
 	/**
 	 * 
@@ -108,16 +106,16 @@ public class PositionAlignment_setting extends AbstractPage {
 	private JSlider slider_sideLength;
 
 	public PositionAlignment_setting() {
-		/*
-		 * TitleImage(); initComponents(); setDefaultAlignment();
-		 */
+		TitleImage();
+		initComponents();
+		setDefaultAlignment();
 	}
 
 	@Override
 	protected void initPage() {
-		TitleImage();
+		/*TitleImage();
 		initComponents();
-		setDefaultAlignment();
+		setDefaultAlignment();*/
 	}
 
 	private void TitleImage() {
