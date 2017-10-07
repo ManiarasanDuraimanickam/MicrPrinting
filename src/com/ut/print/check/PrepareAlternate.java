@@ -38,7 +38,7 @@ import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
 @Component
-@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PrepareAlternate extends AbstractPage {
 	/**
 	 * 
@@ -100,16 +100,46 @@ public class PrepareAlternate extends AbstractPage {
 	private JLabel jLabel86;
 	private JLabel jLabel87;
 	private JLabel jLabel88;
+	private JPanel jPanel4;
+	private JTextField slipFirstCenter1;
+	private JTextField slipFirstCenter2;
+	private JTextField slipFirstCenter3;
+	private JTextField slipFirstCenter4;
+	private JTextField slipFirstMicr1;
+	private JTextField slipFirstMicr2;
+	private JTextField slipFirstMicr3;
+	private JTextField slipFirstMicr4;
+	private JTextField slipFirstSide1;
+	private JTextField slipFirstSide2;
+	private JTextField slipSecondCenter1;
+	private JTextField slipSecondCenter2;
+	private JTextField slipSecondCenter3;
+	private JTextField slipSecondCenter4;
+	private JTextField slipSecondMicr1;
+	private JTextField slipSecondMicr2;
+	private JTextField slipSecondMicr3;
+	private JTextField slipSecondMicr4;
+	private JTextField slipSecondSide1;
+	private JTextField slipSecondSide2;
+	private JTextField slipThirdCenter1;
+	private JTextField slipThirdCenter2;
+	private JTextField slipThirdCenter3;
+	private JTextField slipThirdCenter4;
+	private JTextField slipThirdMicr1;
+	private JTextField slipThirdMicr2;
+	private JTextField slipThirdMicr3;
+	private JTextField slipThirdMicr4;
+	private JTextField slipThirdSide1;
+	private JTextField slipThirdSide2;
 
 	private CommonJDBCRepo commonJDBCRepo;
 
 	public PrepareAlternate() {
-		/*commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
-		initComponents();
-		TitleImage();
-		getBankList();*/
+		/*
+		 * commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
+		 * initComponents(); TitleImage(); getBankList();
+		 */
 	}
-	
 
 	@Override
 	protected void initPage() {
@@ -943,57 +973,17 @@ public class PrepareAlternate extends AbstractPage {
 		this.ThirdSlipHolder_name.setText(Holder_Name);
 	}
 
-	private JPanel jPanel4;
-	private JTextField slipFirstCenter1;
-	private JTextField slipFirstCenter2;
-	private JTextField slipFirstCenter3;
-	private JTextField slipFirstCenter4;
-	private JTextField slipFirstMicr1;
-	private JTextField slipFirstMicr2;
-
-	public static void main(String[] args) {
-		try {
-			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(PrepareAlternate.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		}
-
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new PrepareAlternate().setVisible(true);
-			}
-		});
-	}
-
-	private JTextField slipFirstMicr3;
-	private JTextField slipFirstMicr4;
-	private JTextField slipFirstSide1;
-	private JTextField slipFirstSide2;
-	private JTextField slipSecondCenter1;
-	private JTextField slipSecondCenter2;
-	private JTextField slipSecondCenter3;
-	private JTextField slipSecondCenter4;
-	private JTextField slipSecondMicr1;
-	private JTextField slipSecondMicr2;
-	private JTextField slipSecondMicr3;
-	private JTextField slipSecondMicr4;
-	private JTextField slipSecondSide1;
-	private JTextField slipSecondSide2;
-	private JTextField slipThirdCenter1;
-	private JTextField slipThirdCenter2;
-	private JTextField slipThirdCenter3;
-	private JTextField slipThirdCenter4;
-	private JTextField slipThirdMicr1;
-	private JTextField slipThirdMicr2;
-	private JTextField slipThirdMicr3;
-	private JTextField slipThirdMicr4;
-	private JTextField slipThirdSide1;
-	private JTextField slipThirdSide2;
+	/*
+	 * public static void main(String[] args) { try { for (UIManager.LookAndFeelInfo
+	 * info : UIManager.getInstalledLookAndFeels()) { if
+	 * ("Nimbus".equals(info.getName())) {
+	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch
+	 * (ClassNotFoundException | InstantiationException | IllegalAccessException |
+	 * javax.swing.UnsupportedLookAndFeelException ex) {
+	 * java.util.logging.Logger.getLogger(PrepareAlternate.class.getName()).log(java
+	 * .util.logging.Level.SEVERE, null, ex); }
+	 * 
+	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { new
+	 * PrepareAlternate().setVisible(true); } }); }
+	 */
 }
