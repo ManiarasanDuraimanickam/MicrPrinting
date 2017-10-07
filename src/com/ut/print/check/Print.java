@@ -25,8 +25,11 @@ import javax.swing.LayoutStyle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ut.print.ComponentFactory;
 import com.ut.print.app.model.PrintingContent;
 import com.ut.print.app.model.PrintingObject;
 import com.ut.print.check.print.PrintChequeNo;
@@ -34,7 +37,8 @@ import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
 @Component
-public class Print extends javax.swing.JFrame {
+@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Print extends AbstractPage {
 	/**
 	 * 
 	 */
@@ -98,23 +102,31 @@ public class Print extends javax.swing.JFrame {
 	private JTextField txtcenteraddress4;
 	private JTextField txtnumfrom;
 
-	@Autowired
 	private CommonJDBCRepo commonJDBCRepo;
 
 	@Autowired
 	private PositionAlignment_setting alignment_setting;
-	
+
 	@Autowired
 	private AddNewBank addNewBank;
-	
+
 	@Autowired
 	private PrepareAlternate prepareAlternate;
 
 	public Print() {
+		/*
+		 * initComponents(); TitleImage();
+		 */
+	}
+
+	protected void initPage() {
+		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
+		alignment_setting = ComponentFactory.getBeanByType(PositionAlignment_setting.class);
+		addNewBank = ComponentFactory.getBeanByType(AddNewBank.class);
+		prepareAlternate = ComponentFactory.getBeanByType(PrepareAlternate.class);
 		initComponents();
 		TitleImage();
 		GetBankList();
-
 	}
 
 	private void GetBankList() {
@@ -310,107 +322,83 @@ public class Print extends javax.swing.JFrame {
 
 		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
 		this.jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout
-				.setHorizontalGroup(
-						jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-								jPanel1Layout
-										.createSequentialGroup().addGap(72, 72, 72).addGroup(jPanel1Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING,
-														false)
-												.addGroup(jPanel1Layout.createSequentialGroup()
-														.addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING)
-																.addComponent(this.jLabel4, -2, 126, -2)
-																.addComponent(this.jLabel3, -2, 126, -2)
-																.addComponent(this.jLabel5, -2, 129, -2)
-																.addComponent(this.jLabel1, -2, 137, -2)
-																.addComponent(this.jLabel15, -2, 126, -2)
-																.addComponent(this.jLabel6, -2, 136, -2)
-																.addComponent(this.jLabel16, -2, 132, -2))
-														.addGap(42, 42, 42)
-														.addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING)
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.TRAILING, false)
-																		.addComponent(this.txtcenteraddress2,
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.txtcenteraddress1,
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.txtaddressside2,
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.SelectBankName,
-																				GroupLayout.Alignment.LEADING, 0, 150,
-																				32767)
-																		.addComponent(this.txtaddressside1,
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.txtcenteraddress3))
-																.addComponent(this.txtcenteraddress4,
-																		GroupLayout.Alignment.TRAILING, -2, 150, -2)))
-												.addGroup(jPanel1Layout.createSequentialGroup()
-														.addComponent(this.jLabel17, -2, 132, -2)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1,
-																32767)
-														.addComponent(this.txtAccNo, -2, 150, -2)))
-										.addGap(77, 77, 77)
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(72, 72, 72).addGroup(jPanel1Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+						.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+								.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(this.jLabel4, -2, 126, -2).addComponent(this.jLabel3, -2, 126, -2)
+								.addComponent(this.jLabel5, -2, 129, -2).addComponent(this.jLabel1, -2, 137, -2)
+								.addComponent(this.jLabel15, -2, 126, -2).addComponent(this.jLabel6, -2, 136, -2)
+								.addComponent(this.jLabel16, -2, 132, -2)).addGap(42, 42, 42)
+								.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(jPanel1Layout
+												.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+												.addComponent(this.txtcenteraddress2, GroupLayout.Alignment.LEADING)
+												.addComponent(this.txtcenteraddress1, GroupLayout.Alignment.LEADING)
+												.addComponent(this.txtaddressside2, GroupLayout.Alignment.LEADING)
+												.addComponent(this.SelectBankName, GroupLayout.Alignment.LEADING, 0,
+														150, 32767)
+												.addComponent(this.txtaddressside1, GroupLayout.Alignment.LEADING)
+												.addComponent(this.txtcenteraddress3))
+										.addComponent(this.txtcenteraddress4, GroupLayout.Alignment.TRAILING, -2, 150,
+												-2)))
+						.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jLabel17, -2, 132, -2)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+								.addComponent(this.txtAccNo, -2, 150, -2)))
+						.addGap(77, 77, 77)
+						.addGroup(
+								jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+										.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
 												.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 												.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
 														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-														.addGroup(jPanel1Layout
-																.createSequentialGroup()
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING, false)
-																		.addComponent(this.jLabel9, -1, -1, 32767)
-																		.addComponent(this.jLabel7, -2, 118, -2)
-																		.addComponent(this.jLabel8, -2, 106, -2))
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(this.jLabel13))
-														.addGroup(jPanel1Layout.createSequentialGroup()
-																.addComponent(this.jLabel10, -2, 87, -2)
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-																		-1, 32767)
-																.addComponent(this.jLabel12)))
-														.addGap(21, 21, 21)
-														.addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.TRAILING)
-																.addComponent(this.txtbankcode, -2, 150, -2)
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING, false)
-																		.addComponent(this.noto)
-																		.addComponent(this.txtbankcode1, -1, 150, 32767)
-																		.addComponent(this.txtnumfrom))))
-												.addGroup(jPanel1Layout.createSequentialGroup()
-														.addComponent(this.jLabel11, -2, 118, -2)
+														.addComponent(this.jLabel9, -1, -1, 32767)
+														.addComponent(this.jLabel7, -2, 118, -2)
+														.addComponent(this.jLabel8, -2, 106, -2))
 														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(this.jLabel14).addGap(22, 22, 22)
-														.addComponent(this.txtbankcode2, -2, 150, -2))
-												.addGroup(GroupLayout.Alignment.TRAILING,
-														jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING,
-																		false)
-																.addComponent(this.jLabel18, -1, -1, 32767)
-																.addComponent(this.jLabel19, -1, -1, 32767))
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-																		-1, 32767)
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.txtHolderOrg,
-																				GroupLayout.Alignment.TRAILING, -2, 150, -2)
-																		.addComponent(this.txtHolderName,
-																				GroupLayout.Alignment.TRAILING, -2, 150, -2)))
-												.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout
-														.createSequentialGroup().addComponent(this.jLabel21)
+														.addComponent(this.jLabel13))
+												.addGroup(jPanel1Layout.createSequentialGroup()
+														.addComponent(this.jLabel10, -2, 87, -2)
 														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1,
 																32767)
+														.addComponent(this.jLabel12)))
+												.addGap(21, 21, 21)
+												.addGroup(jPanel1Layout
+														.createParallelGroup(GroupLayout.Alignment.TRAILING)
+														.addComponent(this.txtbankcode, -2, 150, -2)
 														.addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING)
+																.createParallelGroup(GroupLayout.Alignment.LEADING,
+																		false)
+																.addComponent(this.noto)
+																.addComponent(this.txtbankcode1, -1, 150, 32767)
+																.addComponent(this.txtnumfrom))))
+										.addGroup(jPanel1Layout.createSequentialGroup()
+												.addComponent(this.jLabel11, -2, 118, -2)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(this.jLabel14).addGap(22, 22, 22)
+												.addComponent(this.txtbankcode2, -2, 150, -2))
+										.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout
+												.createSequentialGroup()
+												.addGroup(jPanel1Layout
+														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+														.addComponent(this.jLabel18, -1, -1, 32767)
+														.addComponent(this.jLabel19, -1, -1, 32767))
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+												.addGroup(jPanel1Layout
+														.createParallelGroup(GroupLayout.Alignment.LEADING)
+														.addComponent(this.txtHolderOrg, GroupLayout.Alignment.TRAILING,
+																-2, 150, -2)
+														.addComponent(this.txtHolderName,
+																GroupLayout.Alignment.TRAILING, -2, 150, -2)))
+										.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+												.addComponent(this.jLabel21)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+												.addGroup(
+														jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																.addComponent(this.jButton1, -2, 76, -2)
 																.addComponent(this.txtAccountType, -2, 150, -2))))
-										.addContainerGap(304, 32767)));
+						.addContainerGap(304, 32767)));
 
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap(62, 32767)
@@ -467,7 +455,7 @@ public class Print extends javax.swing.JFrame {
 
 		this.jMenu3.setText("Settings");
 
-		this.jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/notices1.jpg")));
+		this.jMenuItem1.setIcon(Utils.getImageIcon("/iMAGE/notices1.jpg"));
 		this.jMenuItem1.setText("Position Aligment");
 		this.jMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -476,7 +464,7 @@ public class Print extends javax.swing.JFrame {
 		});
 		this.jMenu3.add(this.jMenuItem1);
 
-		this.jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/addbank.jpg")));
+		this.jMenuItem2.setIcon(Utils.getImageIcon("/iMAGE/addbank.jpg"));
 		this.jMenuItem2.setText("Bank Detaills");
 		this.jMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -486,7 +474,7 @@ public class Print extends javax.swing.JFrame {
 		this.jMenu3.add(this.jMenuItem2);
 
 		this.JmenuPrepareAlternate.setText("Prepare Alternate");
-		this.JmenuPrepareAlternate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iMAGE/alternate.png")));
+		this.JmenuPrepareAlternate.setIcon(Utils.getImageIcon("/iMAGE/alternate.png"));
 		this.JmenuPrepareAlternate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				Print.this.JmenuPrepareAlternateActionPerformed(evt);
@@ -569,14 +557,12 @@ public class Print extends javax.swing.JFrame {
 	}
 
 	private void jButton1ActionPerformed(ActionEvent evt) {
-		/*String side_length = null;
-		String side_height = null;
-		String side_space = null;
-		String center_length = null;
-		String center_height = null;
-		String center_space = null;
-		String chequeNum_len = null;
-		String chequeNum_heg = null;*/
+		/*
+		 * String side_length = null; String side_height = null; String side_space =
+		 * null; String center_length = null; String center_height = null; String
+		 * center_space = null; String chequeNum_len = null; String chequeNum_heg =
+		 * null;
+		 */
 		String java_home = System.getProperty("user.home");
 		String alignment_file = java_home + "\\Cheque_MICRPrinting\\alignment";
 
@@ -598,7 +584,7 @@ public class Print extends javax.swing.JFrame {
 				fout = new FileInputStream(file_default);
 			}
 			ObjectInputStream obj_in = new ObjectInputStream(fout);
-			//Throwable localThrowable2 = null;
+			// Throwable localThrowable2 = null;
 			this.ali_ser = ((aligment_position_serialize) obj_in.readObject());
 			obj_in.close();
 			fout.close();
@@ -615,8 +601,8 @@ public class Print extends javax.swing.JFrame {
 		this.printData.getPrintingContent().clear();
 		this.printContent.getAli_ser().add(this.ali_ser);
 
-		java.net.URL urlimage1 = getClass().getResource("MICR121.gif");
-		java.net.URL urlimage2 = getClass().getResource("MICR122.gif");
+		java.net.URL urlimage1 = Utils.getImageURLFromDefaultLocation("MICR121.gif");
+		java.net.URL urlimage2 = Utils.getImageURLFromDefaultLocation("MICR122.gif");
 		this.printContent.setUrlimage1(urlimage1);
 		this.printContent.setUrlimage2(urlimage2);
 		this.printContent.setSideaddress1(this.txtaddressside1.getText());
@@ -645,12 +631,11 @@ public class Print extends javax.swing.JFrame {
 	/*
 	 * public static void main(String[] args) { try { for
 	 * (javax.swing.UIManager.LookAndFeelInfo info :
-	 * UIManager.getInstalledLookAndFeels()) { if
-	 * ("Nimbus".equals(info.getName())) {
-	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
+	 * UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName()))
+	 * { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
 	 * catch (ClassNotFoundException | InstantiationException |
-	 * IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
-	 * { LOG.error(ex); }
+	 * IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+	 * LOG.error(ex); }
 	 * 
 	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { new
 	 * Print().setVisible(true); } }); }

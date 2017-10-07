@@ -26,8 +26,11 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ut.print.ComponentFactory;
 import com.ut.print.app.model.PrintingContent;
 import com.ut.print.app.model.PrintingObject;
 import com.ut.print.check.print.PrintChequeNo;
@@ -35,7 +38,8 @@ import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
 @Component
-public class PrepareAlternate extends javax.swing.JFrame {
+@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class PrepareAlternate extends AbstractPage {
 	/**
 	 * 
 	 */
@@ -97,10 +101,19 @@ public class PrepareAlternate extends javax.swing.JFrame {
 	private JLabel jLabel87;
 	private JLabel jLabel88;
 
-	@Autowired
 	private CommonJDBCRepo commonJDBCRepo;
 
 	public PrepareAlternate() {
+		/*commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
+		initComponents();
+		TitleImage();
+		getBankList();*/
+	}
+	
+
+	@Override
+	protected void initPage() {
+		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
 		initComponents();
 		TitleImage();
 		getBankList();
@@ -253,64 +266,40 @@ public class PrepareAlternate extends javax.swing.JFrame {
 
 		GroupLayout jPanel2Layout = new GroupLayout(this.jPanel2);
 		this.jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout
-				.setHorizontalGroup(
-						jPanel2Layout
-								.createParallelGroup(
-										GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel2Layout.createSequentialGroup().addGap(72, 72, 72)
-										.addGroup(jPanel2Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-														jPanel2Layout.createSequentialGroup().addGroup(jPanel2Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING)
-																.addComponent(this.jLabel94)
-																.addComponent(this.jLabel93, -2, 126, -2)
-																.addComponent(this.jLabel92, -2, 114, -2)
-																.addComponent(this.jLabel87, -2,
-																		126, -2)
-																.addComponent(this.jLabel73, -2, 107, -2))
-																.addGap(45, 45, 45)
-																.addGroup(jPanel2Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.slipFirstSide1,
-																				GroupLayout.Alignment.TRAILING, -2, 132,
-																				-2)
-																		.addComponent(this.slipFirstSide2, -2, 132, -2)
-																		.addComponent(this.FirstSlipAccNo,
-																				GroupLayout.Alignment.TRAILING, -2, 132,
-																				-2)
-																		.addComponent(this.FirstSlipOrgName,
-																				GroupLayout.Alignment.TRAILING, -2,
-																				132, -2)
-																		.addComponent(
-																				this.FirstSlipHolderName,
-																				GroupLayout.Alignment.TRAILING, -2, 132,
-																				-2))
-																.addGap(71, 71, 71)
-																.addGroup(jPanel2Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.jLabel95, -2, 126, -2)
-																		.addComponent(this.jLabel77, -2, 136, -2)
-																		.addComponent(this.jLabel74, -2, 136, -2)
-																		.addComponent(this.jLabel86, -2, 137, -2)
-																		.addComponent(this.jLabel76, -2, 129, -2)))
-												.addGroup(jPanel2Layout.createSequentialGroup()
-														.addComponent(this.slipFirstMicr1, -2, 126, -2)
-														.addGap(45, 45, 45)
-														.addComponent(this.slipFirstMicr2, -2, 132, -2)
-														.addGap(71, 71, 71)
-														.addComponent(this.slipFirstMicr3, -2, 131, -2)))
-										.addGap(56, 56, 56)
-										.addGroup(jPanel2Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-												.addComponent(this.slipFirstMicr4, -1, 132, 32767)
-												.addComponent(this.slipFirstCenter2, GroupLayout.Alignment.TRAILING)
-												.addComponent(this.slipFirstCenter3).addComponent(this.slipFirstCenter4)
-												.addComponent(this.FirstSlipAccType)
-												.addComponent(this.slipFirstCenter1, GroupLayout.Alignment.TRAILING))
-										.addContainerGap(-1, 32767)));
+		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(72, 72, 72).addGroup(jPanel2Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel2Layout.createSequentialGroup().addGroup(jPanel2Layout
+								.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jLabel94)
+								.addComponent(this.jLabel93, -2, 126, -2).addComponent(this.jLabel92, -2, 114, -2)
+								.addComponent(this.jLabel87, -2, 126, -2).addComponent(this.jLabel73, -2, 107, -2))
+								.addGap(45, 45, 45)
+								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addComponent(this.slipFirstSide1, GroupLayout.Alignment.TRAILING, -2, 132, -2)
+										.addComponent(this.slipFirstSide2, -2, 132, -2)
+										.addComponent(this.FirstSlipAccNo, GroupLayout.Alignment.TRAILING, -2, 132, -2)
+										.addComponent(this.FirstSlipOrgName, GroupLayout.Alignment.TRAILING, -2, 132,
+												-2)
+										.addComponent(this.FirstSlipHolderName, GroupLayout.Alignment.TRAILING, -2, 132,
+												-2))
+								.addGap(71, 71, 71)
+								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addComponent(this.jLabel95, -2, 126, -2)
+										.addComponent(this.jLabel77, -2, 136, -2)
+										.addComponent(this.jLabel74, -2, 136, -2)
+										.addComponent(this.jLabel86, -2, 137, -2)
+										.addComponent(this.jLabel76, -2, 129, -2)))
+						.addGroup(jPanel2Layout.createSequentialGroup().addComponent(this.slipFirstMicr1, -2, 126, -2)
+								.addGap(45, 45, 45).addComponent(this.slipFirstMicr2, -2, 132, -2).addGap(71, 71, 71)
+								.addComponent(this.slipFirstMicr3, -2, 131, -2)))
+						.addGap(56, 56, 56)
+						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(this.slipFirstMicr4, -1, 132, 32767)
+								.addComponent(this.slipFirstCenter2, GroupLayout.Alignment.TRAILING)
+								.addComponent(this.slipFirstCenter3).addComponent(this.slipFirstCenter4)
+								.addComponent(this.FirstSlipAccType)
+								.addComponent(this.slipFirstCenter1, GroupLayout.Alignment.TRAILING))
+						.addContainerGap(-1, 32767)));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -332,9 +321,10 @@ public class PrepareAlternate extends javax.swing.JFrame {
 										.addComponent(this.jLabel93)))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.FirstSlipHolderName, -2, -1, -2).addGroup(jPanel2Layout
-										.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jLabel94)
-										.addComponent(this.jLabel95).addComponent(this.FirstSlipAccType, -2, -1, -2)))
+								.addComponent(this.FirstSlipHolderName, -2, -1, -2)
+								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+										.addComponent(this.jLabel94).addComponent(this.jLabel95)
+										.addComponent(this.FirstSlipAccType, -2, -1, -2)))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -391,31 +381,29 @@ public class PrepareAlternate extends javax.swing.JFrame {
 
 		GroupLayout jPanel3Layout = new GroupLayout(this.jPanel3);
 		this.jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING)
-				.addGroup(GroupLayout.Alignment.TRAILING, jPanel3Layout
-						.createSequentialGroup()
-						.addContainerGap(-1, 32767).addGroup(jPanel3Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-								.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
-										.createParallelGroup(GroupLayout.Alignment.LEADING)
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
+				GroupLayout.Alignment.TRAILING,
+				jPanel3Layout.createSequentialGroup().addContainerGap(-1, 32767).addGroup(jPanel3Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+						.addGroup(jPanel3Layout
+								.createSequentialGroup()
+								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addComponent(this.jLabel100, -2, 114, -2)
 										.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 												.addComponent(this.jLabel75, -2, 126, -2)
 												.addComponent(this.jLabel88, -2, 126, -2))
 										.addComponent(this.jLabel101, -2, 126, -2)
 										.addComponent(this.jLabel102, -2, 126, -2))
-										.addGap(39, 39, 39)
-										.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-												.addComponent(this.slipThirdSide2, -2, 132, -2)
-												.addComponent(this.slipThirdSide1, -2, 132, -2)
-												.addComponent(this.ThirdSlipAcc_no, -2, 132, -2)
-												.addComponent(this.ThirdSlipOrg_name, -2, 132, -2)
-												.addComponent(this.ThirdSlipHolder_name, -2, 132, -2)))
-								.addGroup(jPanel3Layout.createSequentialGroup()
-										.addComponent(this.slipThirdMicr1, -2, 126, -2).addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
-										.addComponent(this.slipThirdMicr2, -2, 132, -2)))
+								.addGap(39, 39, 39)
+								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+										.addComponent(this.slipThirdSide2, -2, 132, -2)
+										.addComponent(this.slipThirdSide1, -2, 132, -2)
+										.addComponent(this.ThirdSlipAcc_no, -2, 132, -2)
+										.addComponent(this.ThirdSlipOrg_name, -2, 132, -2)
+										.addComponent(this.ThirdSlipHolder_name, -2, 132, -2)))
+						.addGroup(jPanel3Layout.createSequentialGroup().addComponent(this.slipThirdMicr1, -2, 126, -2)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+								.addComponent(this.slipThirdMicr2, -2, 132, -2)))
 						.addGap(68, 68, 68)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -438,11 +426,9 @@ public class PrepareAlternate extends javax.swing.JFrame {
 
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup()
-						.addGroup(
-								jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel75).addComponent(this.slipThirdSide1, -2, -1,
-												-2)
-										.addComponent(this.jLabel78).addComponent(this.slipThirdCenter1, -2, -1, -2))
+						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel75).addComponent(this.slipThirdSide1, -2, -1, -2)
+								.addComponent(this.jLabel78).addComponent(this.slipThirdCenter1, -2, -1, -2))
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel3Layout.createSequentialGroup()
 										.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -468,15 +454,15 @@ public class PrepareAlternate extends javax.swing.JFrame {
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(this.jLabel85)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel102).addComponent(this.ThirdSlipHolder_name, -2, -1,
-												-2))
+										.addComponent(this.jLabel102)
+										.addComponent(this.ThirdSlipHolder_name, -2, -1, -2))
 								.addComponent(this.ThirdSlipAcc_type, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(this.slipThirdMicr4, -2, -1, -2)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(this.slipThirdMicr2, -2, -1, -2).addComponent(this.slipThirdMicr1,
-												-2, -1, -2))
+										.addComponent(this.slipThirdMicr2, -2, -1, -2)
+										.addComponent(this.slipThirdMicr1, -2, -1, -2))
 								.addComponent(this.slipThirdMicr3, -2, -1, -2))
 						.addGap(21, 32, 32767)));
 
@@ -538,8 +524,7 @@ public class PrepareAlternate extends javax.swing.JFrame {
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(this.jLabel90, -2, 126, -2).addComponent(this.jLabel80, -2, 126, -2))
 						.addComponent(this.jLabel97, -2, 126, -2).addComponent(this.jLabel98, -2, 126, -2)
-						.addComponent(this.slipSecondMicr1, -2, 126, -2))
-						.addGap(45, 45, 45)
+						.addComponent(this.slipSecondMicr1, -2, 126, -2)).addGap(45, 45, 45)
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(this.slipSecondSide2, -2, 132, -2)
 								.addComponent(this.slipSecondSide1, -2, 132, -2)
@@ -547,10 +532,10 @@ public class PrepareAlternate extends javax.swing.JFrame {
 								.addComponent(this.SecondSlipOrg_name, -2, 132, -2)
 								.addComponent(this.SecondSlipHolder_name, -2, 132, -2)
 								.addComponent(this.slipSecondMicr2, -2, 132, -2))
-						.addGap(72, 72, 72).addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel4Layout
-										.createSequentialGroup().addGroup(jPanel4Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGap(72, 72, 72)
+						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel4Layout.createSequentialGroup()
+										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addGroup(jPanel4Layout
 														.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
 														.addComponent(this.slipSecondMicr3,
@@ -585,27 +570,28 @@ public class PrepareAlternate extends javax.swing.JFrame {
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel4Layout.createSequentialGroup().addGap(5, 5, 5)
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel91).addComponent(this.slipSecondCenter2, -2,
-														-1, -2)))
+												.addComponent(this.jLabel91)
+												.addComponent(this.slipSecondCenter2, -2, -1, -2)))
 								.addGroup(GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel90).addComponent(this.slipSecondSide2, -2, -1,
-														-2))))
+												.addComponent(this.jLabel90)
+												.addComponent(this.slipSecondSide2, -2, -1, -2))))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel4Layout.createSequentialGroup()
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel82).addComponent(this.slipSecondCenter3, -2,
-														-1, -2))
+												.addComponent(this.jLabel82)
+												.addComponent(this.slipSecondCenter3, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel83).addComponent(this.slipSecondCenter4, -2,
-														-1, -2))
+												.addComponent(this.jLabel83)
+												.addComponent(this.slipSecondCenter4, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel99).addComponent(this.SecondSlipAcc_type, -2,
-														-1, -2)))
+												.addComponent(
+														this.jLabel99)
+												.addComponent(this.SecondSlipAcc_type, -2, -1, -2)))
 								.addGroup(GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 												.addComponent(this.jLabel96)
@@ -668,8 +654,8 @@ public class PrepareAlternate extends javax.swing.JFrame {
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel1Layout.createSequentialGroup().addGap(0, 0, 32767)
-										.addComponent(this.jLabel29, -2, 108, -2)
-										.addGap(134, 134, 134).addComponent(this.jLabel30).addGap(18, 18, 18)
+										.addComponent(this.jLabel29, -2, 108, -2).addGap(134, 134, 134)
+										.addComponent(this.jLabel30).addGap(18, 18, 18)
 										.addComponent(this.SelectBankName, -2, 153, -2))
 								.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
 										.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
@@ -681,24 +667,20 @@ public class PrepareAlternate extends javax.swing.JFrame {
 						.addComponent(this.Btnprint, -2, 76, -2).addGap(70, 70, 70)
 						.addComponent(this.BtnClose, -2, 76, -2).addGap(0, 0, 32767)));
 
-		jPanel1Layout
-				.setVerticalGroup(
-						jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel1Layout
-										.createSequentialGroup()
-										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel29).addComponent(this.jLabel30)
-												.addComponent(this.SelectBankName, -2, -1, -2))
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.jPanel2, -1, 214, 32767)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(this.jPanel4, -2, -1, -2)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.jPanel3, -2, -1, -2)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addComponent(this.Btnprint).addComponent(this.BtnClose))
-										.addContainerGap()));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel29).addComponent(this.jLabel30)
+								.addComponent(this.SelectBankName, -2, -1, -2))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(this.jPanel2, -1, 214, 32767)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(this.jPanel4, -2, -1, -2).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(this.jPanel3, -2, -1, -2)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(this.Btnprint).addComponent(this.BtnClose))
+						.addContainerGap()));
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);

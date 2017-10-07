@@ -19,12 +19,17 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.ut.print.ComponentFactory;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
-
-public class AddNewBank extends javax.swing.JFrame {
+@Component
+@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class AddNewBank extends AbstractPage {
 	/**
 	 * 
 	 */
@@ -71,13 +76,22 @@ public class AddNewBank extends javax.swing.JFrame {
 	private JTextField txtHolderName;
 	private JTextField txtOrganisation;
 
-	@Autowired
 	private CommonJDBCRepo commonJDBCRepo;
 
-	@Autowired
 	private Print print;
 
 	public AddNewBank() {
+		/*
+		 * commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class); print
+		 * = ComponentFactory.getBeanByType(Print.class); initComponents();
+		 * TitleImage(); GetBankList();
+		 */
+	}
+
+	@Override
+	protected void initPage() {
+		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
+		print = ComponentFactory.getBeanByType(Print.class);
 		initComponents();
 		TitleImage();
 		GetBankList();
@@ -233,8 +247,8 @@ public class AddNewBank extends javax.swing.JFrame {
 		this.jPanel2.setLayout(jPanel2Layout);
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addGroup(jPanel2Layout
-						.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanel2Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(GroupLayout.Alignment.TRAILING,
 										jPanel2Layout.createSequentialGroup().addGap(68, 68, 68)
 												.addComponent(this.jLabel13).addGap(17, 17, 17))
@@ -245,8 +259,8 @@ public class AddNewBank extends javax.swing.JFrame {
 														.addComponent(this.backbtn, -2, 92, -2)
 														.addGroup(GroupLayout.Alignment.TRAILING,
 																jPanel2Layout.createSequentialGroup().addGap(33, 33, 33)
-																		.addComponent(this.jLabel14).addGap(22, 22,
-																				22)))
+																		.addComponent(this.jLabel14)
+																		.addGap(22, 22, 22)))
 												.addGroup(jPanel2Layout
 														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 														.addComponent(this.btnupdate, -1, 92, 32767)
@@ -295,93 +309,57 @@ public class AddNewBank extends javax.swing.JFrame {
 
 		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
 		this.jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout
-				.setHorizontalGroup(
-						jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(
-										jPanel1Layout
-												.createSequentialGroup().addGap(47, 47, 47).addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addComponent(this.jLabel8, -2, 86, -2).addComponent(
-																this.jLabel7, -2, 86, -2)
-														.addComponent(this.jLabel6, -2, 86, -2)
-														.addGroup(jPanel1Layout
-																.createParallelGroup(GroupLayout.Alignment.TRAILING)
-																.addComponent(this.jLabel4).addComponent(this.jLabel16))
-														.addComponent(this.jLabel15, -2, 86, -2).addComponent(
-																this.jLabel2, -2, 59, -2)
-														.addComponent(this.jLabel9, -2, 150, -2)
-														.addComponent(this.jLabel10, -2, 150, -2)
-														.addComponent(this.jLabel18).addComponent(this.jLabel19)
-														.addComponent(this.jLabel17)
-														.addComponent(this.jLabel5, -2, 86, -2))
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(47, 47, 47)
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(this.jLabel8, -2, 86, -2).addComponent(this.jLabel7, -2, 86, -2)
+								.addComponent(this.jLabel6, -2, 86, -2)
+								.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+										.addComponent(this.jLabel4).addComponent(this.jLabel16))
+								.addComponent(this.jLabel15, -2, 86, -2).addComponent(this.jLabel2, -2, 59, -2)
+								.addComponent(this.jLabel9, -2, 150, -2).addComponent(this.jLabel10, -2, 150, -2)
+								.addComponent(this.jLabel18).addComponent(this.jLabel19).addComponent(this.jLabel17)
+								.addComponent(this.jLabel5, -2, 86, -2))
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 333, 32767)
+										.addComponent(this.banknamesforedit, -2, 185, -2))
+								.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+										.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addGroup(jPanel1Layout.createSequentialGroup()
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, 32767)
 												.addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addGroup(jPanel1Layout.createSequentialGroup()
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-																		333, 32767)
-																.addComponent(this.banknamesforedit, -2, 185, -2))
-														.addGroup(jPanel1Layout.createSequentialGroup()
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addGroup(jPanel1Layout.createSequentialGroup()
-																				.addPreferredGap(
-																						LayoutStyle.ComponentPlacement.RELATED,
-																						12, 32767)
-																				.addGroup(jPanel1Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								this.txtOrganisation)
-																						.addComponent(this.txtAccNo)
-																						.addComponent(this.center4)
-																						.addComponent(this.center3)
-																						.addComponent(this.center2)
-																						.addComponent(
-																								this.txtHolderName)
-																						.addComponent(this.center1, -1,
-																								188, 32767)
-																						.addComponent(this.side2, -1,
-																								188, 32767)
-																						.addComponent(this.side1, -1,
-																								188, 32767)
-																						.addComponent(this.bankname))
-																				.addPreferredGap(
-																						LayoutStyle.ComponentPlacement.RELATED,
-																						133, 32767))
-																		.addGroup(jPanel1Layout.createSequentialGroup()
-																				.addPreferredGap(
-																						LayoutStyle.ComponentPlacement.UNRELATED)
-																				.addGroup(jPanel1Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								this.bankcode6digits,
-																								-1, 190, 32767)
-																						.addComponent(
-																								this.bankcode9digits))
-																				.addPreferredGap(
-																						LayoutStyle.ComponentPlacement.RELATED,
-																						-1, 32767)))
-																.addComponent(this.jPanel2, -2, -1, -2)))
-												.addContainerGap()));
+														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+														.addComponent(this.txtOrganisation).addComponent(this.txtAccNo)
+														.addComponent(this.center4).addComponent(this.center3)
+														.addComponent(this.center2).addComponent(this.txtHolderName)
+														.addComponent(this.center1, -1, 188, 32767)
+														.addComponent(this.side2, -1, 188, 32767)
+														.addComponent(this.side1, -1, 188, 32767)
+														.addComponent(this.bankname))
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 133, 32767))
+										.addGroup(jPanel1Layout.createSequentialGroup()
+												.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+												.addGroup(jPanel1Layout
+														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+														.addComponent(this.bankcode6digits, -1, 190, 32767)
+														.addComponent(this.bankcode9digits))
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)))
+										.addComponent(this.jPanel2, -2, -1, -2)))
+						.addContainerGap()));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(
-								this.jLabel16).addComponent(this.banknamesforedit, -2, -1, -2))
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(this.jLabel16).addComponent(this.banknamesforedit, -2, -1, -2))
 						.addGap(11, 11, 11)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel1Layout.createSequentialGroup()
-										.addGroup(jPanel1Layout
-												.createParallelGroup(GroupLayout.Alignment.BASELINE)
+										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 												.addComponent(this.jLabel4).addComponent(this.bankname, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel5, -2, 19, -2).addComponent(this.side1, -2, -1,
-														-2))
+												.addComponent(this.jLabel5, -2, 19, -2)
+												.addComponent(this.side1, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 												.addComponent(this.jLabel2).addComponent(this.side2, -2, -1, -2))
@@ -402,16 +380,16 @@ public class AddNewBank extends javax.swing.JFrame {
 												.addComponent(this.jLabel17).addComponent(this.txtAccNo, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel19).addComponent(this.txtHolderName, -2, -1,
-														-2))
+												.addComponent(this.jLabel19)
+												.addComponent(this.txtHolderName, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel18).addComponent(this.txtOrganisation, -2, -1,
-														-2))
+												.addComponent(this.jLabel18)
+												.addComponent(this.txtOrganisation, -2, -1, -2))
 										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-												.addComponent(this.jLabel9).addComponent(this.bankcode9digits, -2, -1,
-														-2)))
+												.addComponent(this.jLabel9)
+												.addComponent(this.bankcode9digits, -2, -1, -2)))
 								.addComponent(this.jPanel2, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -518,7 +496,7 @@ public class AddNewBank extends javax.swing.JFrame {
 	private void btnupdateActionPerformed(ActionEvent evt) {
 		try {
 			String bank_name = this.banknamesforedit.getSelectedItem().toString();
-			
+
 			String bank = this.bankname.getText();
 			String side = this.side1.getText();
 			String nextside = this.side2.getText();
@@ -531,18 +509,27 @@ public class AddNewBank extends javax.swing.JFrame {
 			String Accno = this.txtAccNo.getText();
 			String HolderName = this.txtHolderName.getText();
 			String OrganisationName = this.txtOrganisation.getText();
-			
-			Map<String, Object> bankDetails=this.commonJDBCRepo.getBank(bank);
-			
-			if (bankDetails !=null && bankDetails.size()>0) {
-				boolean updateSts=this.commonJDBCRepo.updateBankdetailsByBankName(side, nextside, center_first, center_second, center_third, bank_9digits, bank_6digits, center_four, Accno, HolderName, OrganisationName, bank_6digits);
-				if(updateSts)
-				JOptionPane.showMessageDialog(null, "Successfully Updated");
-				else JOptionPane.showMessageDialog(null, "Error Occured while updating bank details, Please contact the Developer.");
+
+			Map<String, Object> bankDetails = this.commonJDBCRepo.getBank(bank);
+
+			if (bankDetails != null && bankDetails.size() > 0) {
+				boolean updateSts = this.commonJDBCRepo.updateBankdetailsByBankName(side, nextside, center_first,
+						center_second, center_third, bank_9digits, bank_6digits, center_four, Accno, HolderName,
+						OrganisationName, bank_6digits);
+				if (updateSts)
+					JOptionPane.showMessageDialog(null, "Successfully Updated");
+				else
+					JOptionPane.showMessageDialog(null,
+							"Error Occured while updating bank details, Please contact the Developer.");
 			} else {
-				boolean updateSts=this.commonJDBCRepo.updateBankAlldetailsByOldBankName(bank, side, nextside, center_first, center_second, center_third, bank_9digits, bank_6digits, center_four, Accno, HolderName, OrganisationName, bank_name);
-				if(updateSts)JOptionPane.showMessageDialog(null, "Successfully Updated");
-				else JOptionPane.showMessageDialog(null, "Error Occured while updating bank details, Please contact the Developer.");
+				boolean updateSts = this.commonJDBCRepo.updateBankAlldetailsByOldBankName(bank, side, nextside,
+						center_first, center_second, center_third, bank_9digits, bank_6digits, center_four, Accno,
+						HolderName, OrganisationName, bank_name);
+				if (updateSts)
+					JOptionPane.showMessageDialog(null, "Successfully Updated");
+				else
+					JOptionPane.showMessageDialog(null,
+							"Error Occured while updating bank details, Please contact the Developer.");
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Check your Db Connection");
@@ -553,10 +540,12 @@ public class AddNewBank extends javax.swing.JFrame {
 	private void BankDeleteActionPerformed(ActionEvent evt) {
 		try {
 			String bank = this.bankname.getText();
-			boolean deleteStatus=this.commonJDBCRepo.deleteBankDetails(bank);
-			if(deleteStatus)
-			JOptionPane.showMessageDialog(null, "Successfully Updated");
-			else JOptionPane.showMessageDialog(null, "Error Occured while delete the bank details, Please contact the Developer.");
+			boolean deleteStatus = this.commonJDBCRepo.deleteBankDetails(bank);
+			if (deleteStatus)
+				JOptionPane.showMessageDialog(null, "Successfully Updated");
+			else
+				JOptionPane.showMessageDialog(null,
+						"Error Occured while delete the bank details, Please contact the Developer.");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Check your Db Connection");
 			System.out.println("Error on data Insert-====" + e.getMessage());
@@ -566,32 +555,22 @@ public class AddNewBank extends javax.swing.JFrame {
 	private void center4ActionPerformed(ActionEvent evt) {
 	}
 
-	/*public static void main(String[] args) {
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					ex);
-		}
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new AddNewBank().setVisible(true);
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) { try { for
+	 * (javax.swing.UIManager.LookAndFeelInfo info :
+	 * UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName()))
+	 * { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
+	 * catch (ClassNotFoundException ex) {
+	 * java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.
+	 * logging.Level.SEVERE, null, ex); } catch (InstantiationException ex) {
+	 * java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.
+	 * logging.Level.SEVERE, null, ex); } catch (IllegalAccessException ex) {
+	 * java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.
+	 * logging.Level.SEVERE, null, ex); } catch
+	 * (javax.swing.UnsupportedLookAndFeelException ex) {
+	 * java.util.logging.Logger.getLogger(AddNewBank.class.getName()).log(java.util.
+	 * logging.Level.SEVERE, null, ex); } java.awt.EventQueue.invokeLater(new
+	 * Runnable() { public void run() { new AddNewBank().setVisible(true); } }); }
+	 */
 
 }

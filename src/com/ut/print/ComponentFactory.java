@@ -15,10 +15,12 @@ public class ComponentFactory {
 	}
 
 	public static <T> T getBeanByType(Class<T> cls) {
+		if(applicationContext==null) return null;
 		return applicationContext.getBean(cls);
 	}
 
 	public static <T> T getBeanByName(String cls) {
+		if(applicationContext==null) return null;
 		return (T) applicationContext.getBean(cls);
 	}
 }

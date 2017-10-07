@@ -22,12 +22,15 @@ import javax.swing.event.ChangeListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.ut.print.common.Utils;
 
 @Component
-public class PositionAlignment_setting extends javax.swing.JFrame {
+@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class PositionAlignment_setting extends AbstractPage {
 	/**
 	 * 
 	 */
@@ -105,6 +108,13 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 	private JSlider slider_sideLength;
 
 	public PositionAlignment_setting() {
+		/*
+		 * TitleImage(); initComponents(); setDefaultAlignment();
+		 */
+	}
+
+	@Override
+	protected void initPage() {
 		TitleImage();
 		initComponents();
 		setDefaultAlignment();
@@ -399,11 +409,10 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		});
 		GroupLayout jPanel2Layout = new GroupLayout(this.jPanel2);
 		this.jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(
-				jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanel2Layout
-						.createSequentialGroup().addGroup(jPanel2Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-										GroupLayout.Alignment.TRAILING,
+		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(GroupLayout.Alignment.TRAILING,
 										jPanel2Layout.createSequentialGroup().addComponent(this.jLabel17, -1, -1, 32767)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(this.slider_sideLength, -2, 148, -2)
@@ -417,20 +426,20 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 										.addComponent(this.lbl_sideaddress_btSpace, -2, 43, -2).addGap(0, 0, 32767))
 								.addGroup(GroupLayout.Alignment.TRAILING,
 										jPanel2Layout.createSequentialGroup().addComponent(this.jLabel18, -2, 58, -2)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(
-														this.slider_sideHeigth, -2, 0, 32767)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(this.slider_sideHeigth, -2, 0, 32767)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(this.lbl_sideaddress_height, -2, 43, -2)))
 						.addContainerGap())
-						.addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-								.addGap(0, 0, 32767).addComponent(this.jLabel16, -2, 111, -2).addGap(70, 70, 70)));
+				.addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup().addGap(0, 0, 32767)
+						.addComponent(this.jLabel16, -2, 111, -2).addGap(70, 70, 70)));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addComponent(this.jLabel16, -2, 20, -2)
 						.addGap(18, 18, 18)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-										.addComponent(this.jLabel17, -1, -1, 32767).addComponent(this.slider_sideLength,
-												-2, 17, -2))
+										.addComponent(this.jLabel17, -1, -1, 32767)
+										.addComponent(this.slider_sideLength, -2, 17, -2))
 								.addComponent(this.lbl_sideaddress_length, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -499,49 +508,35 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		});
 		GroupLayout jPanel3Layout = new GroupLayout(this.jPanel3);
 		this.jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout
-				.setHorizontalGroup(
-						jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel3Layout
-										.createSequentialGroup().addGroup(jPanel3Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-														jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
-																.createParallelGroup(GroupLayout.Alignment.LEADING,
-																		false)
-																.addComponent(this.jLabel21)
-																.addComponent(this.jLabel22, -1, 62, 32767))
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(jPanel3Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING, false)
-																		.addComponent(this.slider_centerLen, -1, 148,
-																				32767)
-																		.addComponent(this.slider_centerHeg, -2, 0,
-																				32767))
-																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(jPanel3Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.lbl_centerAddr_length, -2,
-																				43, -2)
-																		.addComponent(this.lbl_centerAddr_height, -2,
-																				43, -2)))
-												.addGroup(jPanel3Layout.createSequentialGroup()
-														.addComponent(this.jLabel23, -2, 58, -2)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(this.slider_centerGap, -2, 148, -2)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(this.lbl_centerAddr_btspace, -2, 43, -2))
-												.addGroup(jPanel3Layout.createSequentialGroup().addGap(80, 80, 80)
-														.addComponent(this.jLabel20, -2, 122, -2)))
-										.addContainerGap(22, 32767)));
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup().addGroup(jPanel3Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel3Layout.createSequentialGroup()
+								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+										.addComponent(this.jLabel21).addComponent(this.jLabel22, -1, 62, 32767))
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+										.addComponent(this.slider_centerLen, -1, 148, 32767)
+										.addComponent(this.slider_centerHeg, -2, 0, 32767))
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addComponent(this.lbl_centerAddr_length, -2, 43, -2)
+										.addComponent(this.lbl_centerAddr_height, -2, 43, -2)))
+						.addGroup(jPanel3Layout.createSequentialGroup().addComponent(this.jLabel23, -2, 58, -2)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(this.slider_centerGap, -2, 148, -2)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(this.lbl_centerAddr_btspace, -2, 43, -2))
+						.addGroup(jPanel3Layout.createSequentialGroup().addGap(80, 80, 80).addComponent(this.jLabel20,
+								-2, 122, -2)))
+						.addContainerGap(22, 32767)));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addComponent(this.jLabel20, -2, 20, -2)
 						.addGap(18, 18, 18)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-										.addComponent(this.jLabel21, -1, -1, 32767).addComponent(this.slider_centerLen,
-												-2, 17, -2))
+										.addComponent(this.jLabel21, -1, -1, 32767)
+										.addComponent(this.slider_centerLen, -2, 17, -2))
 								.addComponent(this.lbl_centerAddr_length, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, 32767)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -601,16 +596,14 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 										.addComponent(this.slider_chequeNumHeg, -2, 0, 32767)
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(this.lbl_chequeNum_heg, -2, 43, -2))
-								.addGroup(jPanel8Layout.createSequentialGroup()
-										.addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-												.addGroup(jPanel8Layout.createSequentialGroup()
-														.addContainerGap(108, 32767).addComponent(this.jLabel36)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED))
-												.addGroup(jPanel8Layout.createSequentialGroup()
-														.addComponent(this.jLabel51)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-														.addComponent(this.slider_chequeNumLen, -2, 0, 32767)
-														.addGap(4, 4, 4)))
+								.addGroup(jPanel8Layout.createSequentialGroup().addGroup(jPanel8Layout
+										.createParallelGroup(GroupLayout.Alignment.TRAILING)
+										.addGroup(jPanel8Layout.createSequentialGroup().addContainerGap(108, 32767)
+												.addComponent(this.jLabel36)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED))
+										.addGroup(jPanel8Layout.createSequentialGroup().addComponent(this.jLabel51)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+												.addComponent(this.slider_chequeNumLen, -2, 0, 32767).addGap(4, 4, 4)))
 										.addComponent(this.lbl_chequeNum_len, -2, 43, -2).addGap(2, 2, 2)))
 						.addContainerGap()));
 		jPanel8Layout.setVerticalGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -622,11 +615,10 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 								.addComponent(this.slider_chequeNumLen, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 30, 32767)
 						.addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.lbl_chequeNum_heg, -2, -1, -2).addGroup(jPanel8Layout
-										.createParallelGroup(GroupLayout.Alignment.TRAILING, false).addComponent(
-												this.jLabel52, -1, -1, 32767)
-										.addComponent(this.slider_chequeNumHeg, GroupLayout.Alignment.LEADING, -2, -1,
-												-2)))
+								.addComponent(this.lbl_chequeNum_heg, -2, -1, -2)
+								.addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+										.addComponent(this.jLabel52, -1, -1, 32767).addComponent(
+												this.slider_chequeNumHeg, GroupLayout.Alignment.LEADING, -2, -1, -2)))
 						.addGap(84, 84, 84)));
 		this.btn_alignmentDefault_position.setBackground(new Color(255, 255, 255));
 		this.btn_alignmentDefault_position.setFont(new Font("Times New Roman", 0, 18));
@@ -694,32 +686,28 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		});
 		GroupLayout jPanel4Layout = new GroupLayout(this.jPanel4);
 		this.jPanel4.setLayout(jPanel4Layout);
-		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-				jPanel4Layout
-						.createSequentialGroup().addGroup(jPanel4Layout.createParallelGroup(
-								GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel4Layout
-										.createSequentialGroup().addGroup(jPanel4Layout
-												.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(
-														this.jLabel24, -2, 134, -2)
-												.addGroup(GroupLayout.Alignment.LEADING,
-														jPanel4Layout.createSequentialGroup()
-																.addComponent(this.jLabel25).addGap(10, 10, 10)
-																.addComponent(this.slider_AccNoLen, -2, 148, -2)))
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.lbl_AccNo_length, -2, 43, -2).addGap(0, 0, 32767))
-								.addGroup(jPanel4Layout.createSequentialGroup().addComponent(this.jLabel26, -2, 64, -2)
-										.addGap(2, 2, 2).addComponent(this.slider_AccNoHeg, -2, 0, 32767)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.lbl_AccNo_height, -2, 43, -2)))
+		jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup().addGroup(jPanel4Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel4Layout.createSequentialGroup().addGroup(jPanel4Layout
+								.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(this.jLabel24, -2, 134, -2).addGroup(GroupLayout.Alignment.LEADING,
+										jPanel4Layout.createSequentialGroup().addComponent(this.jLabel25)
+												.addGap(10, 10, 10).addComponent(this.slider_AccNoLen, -2, 148, -2)))
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(this.lbl_AccNo_length, -2, 43, -2).addGap(0, 0, 32767))
+						.addGroup(jPanel4Layout.createSequentialGroup().addComponent(this.jLabel26, -2, 64, -2)
+								.addGap(2, 2, 2).addComponent(this.slider_AccNoHeg, -2, 0, 32767)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(this.lbl_AccNo_height, -2, 43, -2)))
 						.addContainerGap()));
 		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel4Layout.createSequentialGroup().addComponent(this.jLabel24, -2, 20, -2)
 						.addGap(18, 18, 18)
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-										.addComponent(this.jLabel25, -1, -1, 32767).addComponent(this.slider_AccNoLen,
-												-2, 17, -2))
+										.addComponent(this.jLabel25, -1, -1, 32767)
+										.addComponent(this.slider_AccNoLen, -2, 17, -2))
 								.addComponent(this.lbl_AccNo_length, -2, -1, -2))
 						.addGap(27, 27, 27)
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -764,24 +752,22 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		});
 		GroupLayout jPanel5Layout = new GroupLayout(this.jPanel5);
 		this.jPanel5.setLayout(jPanel5Layout);
-		jPanel5Layout.setHorizontalGroup(
-				jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanel5Layout
-						.createSequentialGroup().addGroup(jPanel5Layout
-								.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanel5Layout
-										.createSequentialGroup().addGroup(jPanel5Layout
-												.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addGroup(jPanel5Layout.createSequentialGroup()
-														.addComponent(this.jLabel28).addGap(10, 10, 10)
-														.addComponent(this.slider_HolderNameLen, -2, 148, -2)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
-												.addGroup(GroupLayout.Alignment.TRAILING,
-														jPanel5Layout.createSequentialGroup()
-																.addComponent(this.jLabel27).addGap(38, 38, 38)))
-										.addComponent(this.lbl_HolderName_length, -2, 43, -2).addGap(0, 0, 32767))
-								.addGroup(jPanel5Layout.createSequentialGroup().addComponent(this.jLabel29, -2, 64, -2)
-										.addGap(2, 2, 2).addComponent(this.slider_HolderNameHeg, -2, 0, 32767)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.lbl_HolderName_height, -2, 43, -2)))
+		jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup().addGroup(jPanel5Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel5Layout.createSequentialGroup()
+								.addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addGroup(jPanel5Layout.createSequentialGroup().addComponent(this.jLabel28)
+												.addGap(10, 10, 10).addComponent(this.slider_HolderNameLen, -2, 148, -2)
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
+										.addGroup(GroupLayout.Alignment.TRAILING,
+												jPanel5Layout.createSequentialGroup().addComponent(this.jLabel27)
+														.addGap(38, 38, 38)))
+								.addComponent(this.lbl_HolderName_length, -2, 43, -2).addGap(0, 0, 32767))
+						.addGroup(jPanel5Layout.createSequentialGroup().addComponent(this.jLabel29, -2, 64, -2)
+								.addGap(2, 2, 2).addComponent(this.slider_HolderNameHeg, -2, 0, 32767)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(this.lbl_HolderName_height, -2, 43, -2)))
 						.addContainerGap()));
 		jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel5Layout.createSequentialGroup().addComponent(this.jLabel27, -2, 20, -2)
@@ -847,11 +833,9 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		});
 		GroupLayout jPanel6Layout = new GroupLayout(this.jPanel6);
 		this.jPanel6.setLayout(jPanel6Layout);
-		jPanel6Layout.setHorizontalGroup(jPanel6Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING)
+		jPanel6Layout.setHorizontalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel6Layout.createSequentialGroup().addGroup(jPanel6Layout
-						.createParallelGroup(
-								GroupLayout.Alignment.LEADING)
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(jPanel6Layout.createSequentialGroup().addGroup(jPanel6Layout
 								.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel6Layout.createSequentialGroup().addComponent(this.jLabel31)
@@ -887,10 +871,10 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 										.addComponent(this.slider_OrganisationHeg, -2, -1, -2)))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 10, 32767)
 						.addGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.lbl_Organisation_charLen, -2, -1, -2).addGroup(
-										jPanel6Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-												.addComponent(this.jLabel37, -1, -1, 32767).addComponent(
-														this.slider_OrganisationCharLen, -2, -1, -2)))));
+								.addComponent(this.lbl_Organisation_charLen, -2, -1, -2)
+								.addGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+										.addComponent(this.jLabel37, -1, -1, 32767)
+										.addComponent(this.slider_OrganisationCharLen, -2, -1, -2)))));
 		this.jPanel7.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(42, 188, 217)));
 
 		this.jLabel33.setFont(new Font("Times New Roman", 0, 18));
@@ -933,8 +917,7 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 								.addGroup(jPanel7Layout.createSequentialGroup().addComponent(this.jLabel34)
 										.addGap(10, 10, 10).addComponent(this.slider_AccountTypeLen, -2, 148, -2)
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.lbl_AccountType_length, -2, 43, -2)
-										.addGap(0, 0, 32767))
+										.addComponent(this.lbl_AccountType_length, -2, 43, -2).addGap(0, 0, 32767))
 								.addGroup(jPanel7Layout.createSequentialGroup().addComponent(this.jLabel35, -2, 64, -2)
 										.addGap(2, 2, 2).addComponent(this.slider_AccountTypeHeg, -2, 0, 32767)
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -959,56 +942,39 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 						.addContainerGap(-1, 32767)));
 		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
 		this.jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout
-				.setHorizontalGroup(
-						jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addGroup(jPanel1Layout
-										.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanel1Layout
-												.createSequentialGroup()
-												.addComponent(this.jPanel4, -2, 270, -2)
-												.addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
-																jPanel1Layout
-																		.createSequentialGroup().addGap(18, 114, 32767)
-																		.addComponent(this.jLabel15, -2, 160, -2)
-																		.addGap(364, 364, 364))
-														.addGroup(
-																jPanel1Layout.createSequentialGroup().addGap(
-																		18, 18, 18)
-																		.addComponent(this.jPanel5, -2, 270,
-																				-2)
-																		.addContainerGap(-1, 32767))))
-										.addGroup(
-												jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-														.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout
-																.createSequentialGroup()
-																.addComponent(this.jPanel2, -2, -1, -2)
-																.addGap(18, 18, 18)
-																.addComponent(this.jPanel3, -2, -1, -2)
-																.addGap(18, 28, 32767)
-																.addGroup(jPanel1Layout
-																		.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
-																		.addComponent(this.jPanel6, -2, 270, -2)
-																		.addComponent(this.jPanel8, -2, -1, -2)))
-														.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout
-																.createSequentialGroup().addGap(0, 0, 32767)
-																.addComponent(this.btn_alignmentDefault_position)
-																.addGap(18, 18, 18).addComponent(this.btn_setAligment)
-																.addGap(18, 18, 18).addComponent(this.btn_cancelPanel))
-														.addGroup(jPanel1Layout.createSequentialGroup()
-																.addComponent(this.jPanel7, -2, 270, -2).addGap(0, 0,
-																		32767)))
-														.addContainerGap()))));
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addGroup(jPanel1Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jPanel4, -2, 270, -2)
+								.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addGroup(jPanel1Layout.createSequentialGroup().addGap(18, 114, 32767)
+												.addComponent(this.jLabel15, -2, 160, -2).addGap(364, 364, 364))
+										.addGroup(jPanel1Layout.createSequentialGroup().addGap(18, 18, 18)
+												.addComponent(this.jPanel5, -2, 270, -2).addContainerGap(-1, 32767))))
+						.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+								.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+										.addComponent(this.jPanel2, -2, -1, -2).addGap(18, 18, 18)
+										.addComponent(this.jPanel3, -2, -1, -2).addGap(18, 28, 32767)
+										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addComponent(this.jPanel6, -2, 270, -2)
+												.addComponent(this.jPanel8, -2, -1, -2)))
+								.addGroup(GroupLayout.Alignment.TRAILING,
+										jPanel1Layout.createSequentialGroup().addGap(0, 0, 32767)
+												.addComponent(this.btn_alignmentDefault_position).addGap(18, 18, 18)
+												.addComponent(this.btn_setAligment).addGap(18, 18, 18)
+												.addComponent(this.btn_cancelPanel))
+								.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jPanel7, -2, 270, -2)
+										.addGap(0, 0, 32767)))
+								.addContainerGap()))));
 
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
 						.addComponent(this.jLabel15, -2, 30, -2).addGap(39, 39, 39)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-										.addComponent(this.jPanel2, -1, -1, 32767).addComponent(this.jPanel3, -2, -1,
-												-2))
+										.addComponent(this.jPanel2, -1, -1, 32767)
+										.addComponent(this.jPanel3, -2, -1, -2))
 								.addComponent(this.jPanel8, -2, -1, -2))
 						.addGap(18, 18, 18)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -1341,33 +1307,26 @@ public class PositionAlignment_setting extends javax.swing.JFrame {
 		this.lbl_Organisation_charLen.setText("" + length);
 	}
 
-/*	public static void main(String[] args) {
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		}
-
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new PositionAlignment_setting().setVisible(true);
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) { try { for
+	 * (javax.swing.UIManager.LookAndFeelInfo info :
+	 * UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName()))
+	 * { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
+	 * catch (ClassNotFoundException ex) {
+	 * java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
+	 * .log(java.util.logging.Level.SEVERE, null, ex); } catch
+	 * (InstantiationException ex) {
+	 * java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
+	 * .log(java.util.logging.Level.SEVERE, null, ex); } catch
+	 * (IllegalAccessException ex) {
+	 * java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
+	 * .log(java.util.logging.Level.SEVERE, null, ex); } catch
+	 * (javax.swing.UnsupportedLookAndFeelException ex) {
+	 * java.util.logging.Logger.getLogger(PositionAlignment_setting.class.getName())
+	 * .log(java.util.logging.Level.SEVERE, null, ex); }
+	 * 
+	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { new
+	 * PositionAlignment_setting().setVisible(true); } }); }
+	 */
 
 }

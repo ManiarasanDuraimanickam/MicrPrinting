@@ -5,6 +5,7 @@ CREATE TABLE `chequeprint`.`checkprintedDetails` (
 )
 ENGINE = InnoDB;
 
+ALTER TABLE `chequeprint`.`checkprinteddetails` CHANGE COLUMN `timpstamp` `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `chequeprint`.`checkprintedDetails` MODIFY COLUMN `micrNum` INTEGER UNSIGNED DEFAULT NULL;
 

@@ -17,13 +17,20 @@ import javax.swing.UIManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import com.ut.print.ApplicationConfig;
+import com.ut.print.ComponentFactory;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
 
 @Repository
-public class Login extends javax.swing.JFrame {
+// @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Login extends AbstractPage {
 	/**
 	 * 
 	 */
@@ -43,12 +50,21 @@ public class Login extends javax.swing.JFrame {
 	private JPasswordField txtPassword;
 	private JTextField txtUsername;
 
-	@Autowired
 	private CommonJDBCRepo commonJDBCRepo;
 
 	public Login() {
+
 		initComponents();
 		TitleImage();
+
+	}
+
+	@Override
+	protected void initPage() {
+		commonJDBCRepo = ComponentFactory.getBeanByType(CommonJDBCRepo.class);
+		/*
+		 * initComponents(); TitleImage();
+		 */
 	}
 
 	private void initComponents() {
@@ -141,8 +157,8 @@ public class Login extends javax.swing.JFrame {
 								.addGap(137, 137, 137))
 				.addGroup(jPanel1Layout.createSequentialGroup().addGap(97, 97, 97)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.jLabel6).addComponent(this.jLabel5).addComponent(this.jLabel1, -2,
-										61, -2))
+								.addComponent(this.jLabel6).addComponent(this.jLabel5)
+								.addComponent(this.jLabel1, -2, 61, -2))
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel1Layout.createSequentialGroup().addGap(33, 33, 33)
 										.addComponent(this.btnLogin).addGap(35, 35, 35).addComponent(this.btnClose))
@@ -171,8 +187,7 @@ public class Login extends javax.swing.JFrame {
 										.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jLabel5)
 												.addGap(35, 35, 35).addComponent(this.jLabel6).addGap(20, 20, 20))
 										.addGroup(jPanel1Layout.createSequentialGroup()
-												.addComponent(this.txtUsername, -2, 33, -2).addGap(18, 18,
-														18)
+												.addComponent(this.txtUsername, -2, 33, -2).addGap(18, 18, 18)
 												.addComponent(this.txtPassword, -2, 31, -2).addGap(18, 18, 18)))
 								.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(this.btnLogin).addComponent(this.btnClose))
@@ -237,16 +252,12 @@ public class Login extends javax.swing.JFrame {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (Exception ex) {
+			log.error(null, ex);
 		}
-
+		ApplicationContext context = (ApplicationContext) new AnnotationConfigApplicationContext(
+				ApplicationConfig.class);
+		ComponentFactory.setContextComponent(context);
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new Login().setVisible(true);

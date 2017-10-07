@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CommonJDBCRepo {
+	
+	public CommonJDBCRepo() {
+		System.out.println("CommonJDBCRepo");
+	}
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
