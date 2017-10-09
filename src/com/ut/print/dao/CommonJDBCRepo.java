@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class CommonJDBCRepo {
 	
 	public CommonJDBCRepo() {
-		System.out.println("CommonJDBCRepo");
+		
 	}
 
 	@Autowired

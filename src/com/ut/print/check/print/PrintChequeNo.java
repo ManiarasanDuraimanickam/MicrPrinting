@@ -1,7 +1,10 @@
 package com.ut.print.check.print;
 
+import java.awt.print.Book;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -27,8 +30,11 @@ public class PrintChequeNo {
 		addlineSperatorForOranzarionName();
 		if (this.printData.getPrinttype().equals(PrintingObject.PRINTTYPE.DIRECTPRINT)) {
 			job.setPrintable(new PrintDirectCheque(this.printData.getPrintingContent()));
-		} else
+		} else if (this.printData.getPrinttype().equals(PrintingObject.PRINTTYPE.EXCELIMPORT_PRINT)) {
+			job.setPrintable(new PrintDirectBulkCheque(this.printData.getPrintingContent()));
+		} else {
 			job.setPrintable(new PrintAlternate(this.printData.getPrintingContent()));
+		}
 		if (job.printDialog()) {
 			try {
 				job.print();

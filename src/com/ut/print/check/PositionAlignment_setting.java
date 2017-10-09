@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -110,9 +111,9 @@ public class PositionAlignment_setting extends AbstractPage {
 
 	@Override
 	protected void initPage() {
-		/*TitleImage();
-		initComponents();
-		setDefaultAlignment();*/
+		/*
+		 * TitleImage(); initComponents(); setDefaultAlignment();
+		 */
 	}
 
 	private void TitleImage() {
@@ -131,61 +132,7 @@ public class PositionAlignment_setting extends AbstractPage {
 				file1.mkdirs();
 			}
 			if (!file.exists()) {
-
-				aligment_position_serialize ali_ser = new aligment_position_serialize();
-				ali_ser.setSd_Addr_leg11("76");
-				ali_ser.setSd_Addr_heg12("22");
-				ali_ser.setSd_Addr_spa13("10");
-
-				ali_ser.setCn_Addr_leg11("310");
-				ali_ser.setCn_Addr_heg12("10");
-				ali_ser.setCn_Addr_spa123("10");
-
-				ali_ser.setChquenum_img_leg11("163");
-				ali_ser.setChequenum_img_heg12("226");
-
-				ali_ser.setChequenum_len11("169");
-				ali_ser.setChequenum_heg12("234");
-
-				ali_ser.setChequenum_img2_len11("226");
-				ali_ser.setChequenum_img2_heg12("226");
-
-				ali_ser.setBankcode_9dig_len11("240");
-				ali_ser.setBankcode_9dig_heg12("234");
-
-				ali_ser.setBankcode_img_len11("325");
-				ali_ser.setBankcode_img_heg12("226");
-
-				ali_ser.setBankcode_6dig_len11("337");
-				ali_ser.setBankcode_6dig_heg12("234");
-
-				ali_ser.setBankcode_img2_len11("396");
-				ali_ser.setBankcode_img2_heg12("226");
-
-				ali_ser.setBankcode_2dig_len11("413");
-				ali_ser.setBankcode_2dig_heg12("234");
-
-				ali_ser.setAccNo_len("76");
-				ali_ser.setAccNo_heg("150");
-
-				ali_ser.setAccOrganisationName_len("413");
-				ali_ser.setAccOrganisationName_heg("150");
-
-				ali_ser.setAccHolderName_len("413");
-				ali_ser.setAccHolderName_heg("190");
-
-				ali_ser.setAccountType_len("240");
-				ali_ser.setAccountType_heg("210");
-				ali_ser.setOrgCharLen("40");
-
-				String filename = alignment_file + "\\position_default.txt";
-				FileOutputStream fout = new FileOutputStream(filename);
-				ObjectOutputStream obj_out = new ObjectOutputStream(fout);
-				obj_out.writeObject(ali_ser);
-				obj_out.close();
-				fout.close();
-				obj_out = null;
-				fout = null;
+				createDefaultSizeSettings(alignment_file);
 			} else {
 				aligment_position_serialize ali_ser = null;
 				FileInputStream fout = null;
@@ -275,6 +222,68 @@ public class PositionAlignment_setting extends AbstractPage {
 		}
 	}
 
+	/**
+	 *the function use to create a default setting value
+	 * @param alignment_file
+	 * @throws IOException
+	 */
+	protected void createDefaultSizeSettings(String alignment_file) throws IOException {
+		aligment_position_serialize ali_ser = new aligment_position_serialize();
+		ali_ser.setSd_Addr_leg11("76");
+		ali_ser.setSd_Addr_heg12("22");
+		ali_ser.setSd_Addr_spa13("10");
+
+		ali_ser.setCn_Addr_leg11("310");
+		ali_ser.setCn_Addr_heg12("10");
+		ali_ser.setCn_Addr_spa123("10");
+
+		ali_ser.setChquenum_img_leg11("163");
+		ali_ser.setChequenum_img_heg12("226");
+
+		ali_ser.setChequenum_len11("169");
+		ali_ser.setChequenum_heg12("234");
+
+		ali_ser.setChequenum_img2_len11("226");
+		ali_ser.setChequenum_img2_heg12("226");
+
+		ali_ser.setBankcode_9dig_len11("240");
+		ali_ser.setBankcode_9dig_heg12("234");
+
+		ali_ser.setBankcode_img_len11("325");
+		ali_ser.setBankcode_img_heg12("226");
+
+		ali_ser.setBankcode_6dig_len11("337");
+		ali_ser.setBankcode_6dig_heg12("234");
+
+		ali_ser.setBankcode_img2_len11("396");
+		ali_ser.setBankcode_img2_heg12("226");
+
+		ali_ser.setBankcode_2dig_len11("413");
+		ali_ser.setBankcode_2dig_heg12("234");
+
+		ali_ser.setAccNo_len("76");
+		ali_ser.setAccNo_heg("150");
+
+		ali_ser.setAccOrganisationName_len("413");
+		ali_ser.setAccOrganisationName_heg("150");
+
+		ali_ser.setAccHolderName_len("413");
+		ali_ser.setAccHolderName_heg("190");
+
+		ali_ser.setAccountType_len("240");
+		ali_ser.setAccountType_heg("210");
+		ali_ser.setOrgCharLen("40");
+
+		String filename = alignment_file + "\\position_default.txt";
+		FileOutputStream fout = new FileOutputStream(filename);
+		ObjectOutputStream obj_out = new ObjectOutputStream(fout);
+		obj_out.writeObject(ali_ser);
+		obj_out.close();
+		fout.close();
+		obj_out = null;
+		fout = null;
+	}
+
 	private void initComponents() {
 		this.jPanel1 = new JPanel();
 		this.jPanel2 = new JPanel();
@@ -347,9 +356,17 @@ public class PositionAlignment_setting extends AbstractPage {
 		this.lbl_AccountType_length = new JTextField();
 		this.lbl_AccountType_height = new JTextField();
 
+		/*
+		 * setDefaultCloseOperation(3); setAutoRequestFocus(false);
+		 * setUndecorated(true);
+		 */
 		setDefaultCloseOperation(3);
-		setAutoRequestFocus(false);
+		setTitle("Alignment Setting");
+		// setMaximumSize(new Dimension(800, 800));
+		// setMinimumSize(new Dimension(700, 700));
 		setUndecorated(true);
+		// setPreferredSize(new Dimension(870, 700));
+		setResizable(false);
 
 		this.jPanel1.setBackground(new Color(111, 166, 255));
 		this.jPanel1.setBorder(BorderFactory.createBevelBorder(0));

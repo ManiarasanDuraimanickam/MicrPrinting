@@ -31,6 +31,7 @@ import com.ut.print.app.model.PrintingObject;
 import com.ut.print.check.print.PrintChequeNo;
 import com.ut.print.common.Utils;
 import com.ut.print.dao.CommonJDBCRepo;
+import com.ut.print.xls.XLSFileProcessor;
 
 public class Print extends AbstractPage {
 	/**
@@ -45,7 +46,6 @@ public class Print extends AbstractPage {
 	private aligment_position_serialize ali_ser = new aligment_position_serialize();
 	private PrintingContent printContent;
 
-	private javax.swing.JCheckBoxMenuItem JmenuPrepareAlternate;
 	private JComboBox<String> SelectBankName;
 
 	private JButton jButton1;
@@ -79,6 +79,8 @@ public class Print extends AbstractPage {
 	private JMenuItem jMenuItem1;
 	private JMenuItem jMenuItem2;
 	private JMenuItem jMenuItem3;
+	private JMenuItem jMenuItemBulkPrint;
+	private JMenuItem JmenuPrepareAlternate;
 
 	private JTextField noto;
 	private JTextField txtAccNo;
@@ -98,14 +100,13 @@ public class Print extends AbstractPage {
 
 	private CommonJDBCRepo commonJDBCRepo;
 
-	
 	private PositionAlignment_setting alignment_setting;
 
-	
 	private AddNewBank addNewBank;
 
-	
 	private PrepareAlternate prepareAlternate;
+	
+	private XLSFileProcessor xlsFileProcessor;
 
 	public Print() {
 		/*
@@ -118,6 +119,7 @@ public class Print extends AbstractPage {
 		alignment_setting = new PositionAlignment_setting();
 		addNewBank = new AddNewBank();
 		prepareAlternate = new PrepareAlternate();
+		xlsFileProcessor=new XLSFileProcessor();
 		initComponents();
 		TitleImage();
 		GetBankList();
@@ -175,7 +177,8 @@ public class Print extends AbstractPage {
 		this.jMenu3 = new JMenu();
 		this.jMenuItem1 = new JMenuItem();
 		this.jMenuItem2 = new JMenuItem();
-		this.JmenuPrepareAlternate = new javax.swing.JCheckBoxMenuItem();
+		jMenuItemBulkPrint=new JMenuItem();
+		this.JmenuPrepareAlternate = new JMenuItem();
 
 		setDefaultCloseOperation(3);
 		setTitle("Cheque MICR printing");
@@ -476,6 +479,19 @@ public class Print extends AbstractPage {
 		});
 		this.jMenu3.add(this.JmenuPrepareAlternate);
 
+		this.jMenuItemBulkPrint.setIcon(Utils.getImageIcon("/iMAGE/Excel-icon.png"));
+		this.jMenuItemBulkPrint.setText("Excel Import");
+		this.jMenuItemBulkPrint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				Print.this.jMenuItemBulkPrintActionPerformed(evt);
+			}
+		});
+		this.jMenu3.add(this.jMenuItemBulkPrint);
+		
+		
+		
+		
+		
 		this.jMenuBar1.add(this.jMenu3);
 
 		setJMenuBar(this.jMenuBar1);
@@ -494,11 +510,11 @@ public class Print extends AbstractPage {
 
 	private void jMenuItem1ActionPerformed(ActionEvent evt) {
 		this.alignment_setting.setVisible(true);
-		//dispose();
+		// dispose();
 	}
 
 	private void jMenuItem2ActionPerformed(ActionEvent evt) {
-		
+
 		this.addNewBank.setVisible(true);
 		dispose();
 	}
@@ -512,6 +528,9 @@ public class Print extends AbstractPage {
 
 	private void JmenuPrepareAlternateActionPerformed(ActionEvent evt) {
 		this.prepareAlternate.setVisible(true);
+	}
+	private void jMenuItemBulkPrintActionPerformed(ActionEvent evt) {
+		this.xlsFileProcessor.setVisible(true);
 	}
 
 	private void txtAccNoActionPerformed(ActionEvent evt) {

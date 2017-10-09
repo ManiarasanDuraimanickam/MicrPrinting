@@ -8,6 +8,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -17,50 +18,56 @@ import org.apache.commons.logging.LogFactory;
 import com.ut.print.app.model.PrintingContent;
 import com.ut.print.check.aligment_position_serialize;
 
-public class PrintDirectCheque implements Printable {
-	
-	private static final Log LOG = LogFactory.getLog(PrintDirectCheque.class);
+public class PrintDirectBulkCheque implements Printable {
+
+	private static final Log LOG = LogFactory.getLog(PrintDirectBulkCheque.class);
 	private List<PrintingContent> printingContentList;
 	private PrintingContent printContent;
 	private int[] value;
 	private int[] pagebreak;
+	private int sysPageIndex = 0;
+	private int printPageIndex = 0;
 
-	public PrintDirectCheque(List<PrintingContent> printingContent) {
-		this.printingContentList = printingContent;
+	public PrintDirectBulkCheque(List<PrintingContent> printingContent) {
+		List<PrintingContent> content = new CopyOnWriteArrayList<>(printingContent);
+		this.printingContentList = content;
 	}
 
 	public void initprocess() {
-		this.printContent = ((PrintingContent) this.printingContentList.get(0));
+
 		int from = Integer.parseInt(this.printContent.getNofrom());
 		int to = Integer.parseInt(this.printContent.getNumto());
 		int value_diff = to - from;
 		int loop_end = value_diff + 1;
 		this.value = new int[loop_end];
-		System.out.println("size:==" + this.value.length);
-		System.out.println(value_diff + "  " + loop_end);
 		for (int i = 0; i < loop_end; i++) {
 			this.value[i] = from;
 
 			from += 1;
 		}
-		System.out.println("size:==" + this.value.length);
 	}
 
-	public int print(Graphics g, PageFormat pf, int pageindex) throws PrinterException {
-		LOG.info("-------print----- pageindex = "+pageindex);
+	public int print(Graphics g, PageFormat pf, int pageindx) throws PrinterException {
+		this.printContent = ((PrintingContent) this.printingContentList.get(0));
+		if (pageindx > sysPageIndex) {
+			sysPageIndex = pageindx;
+			printPageIndex = printPageIndex + 1;
+		}
+		// for (int i = 0; i < printingContentList.size(); i++) {
 		initprocess();
-
 		int linesperpage = 3;
 		int numbreakes = (this.value.length - 1) / linesperpage;
-		System.out.println("num breaks" + numbreakes);
 		this.pagebreak = new int[numbreakes];
-
 		for (int j = 0; j < numbreakes; j++) {
 			this.pagebreak[j] = ((j + 1) * linesperpage);
 		}
 
-		System.out.print(" length: " + this.pagebreak.length);
-		if (pageindex > this.pagebreak.length) {
+		if (printPageIndex > this.pagebreak.length) {
+			if (this.printingContentList.size() > 1) {
+				this.printingContentList.remove(0);
+				printPageIndex = 0;
+				return 0;
+			}
 			return 1;
 		}
 		Font f1 = new Font("Arial", 0, 8);
@@ -241,8 +248,8 @@ public class PrintDirectCheque implements Printable {
 		}
 		g.drawString(this.printContent.getBankcode2(), micr_x8, micrstart_y3);
 
-		int start = pageindex == 0 ? 0 : this.pagebreak[(pageindex - 1)];
-		int end = pageindex == this.pagebreak.length ? this.value.length : this.pagebreak[pageindex];
+		int start = printPageIndex == 0 ? 0 : this.pagebreak[(printPageIndex - 1)];
+		int end = printPageIndex == this.pagebreak.length ? this.value.length : this.pagebreak[printPageIndex];
 		g.setFont(f2);
 
 		for (int line = start; line < end; line++) {
@@ -255,6 +262,7 @@ public class PrintDirectCheque implements Printable {
 			micrstart_imgy += 264;
 			micrstart_y += 264;
 		}
+		// }
 		return 0;
 	}
 }

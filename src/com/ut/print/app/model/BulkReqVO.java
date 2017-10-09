@@ -1,86 +1,64 @@
 package com.ut.print.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BulkReqVO {
-	private int slNo;
-	private String nameToBePrinted;
-	private long accountNo;
-	private String otherDetailsToBePrinted;
-	private int noOfBooks;
-	private int noOfLeaves;
-	private int chqNoFrom;
-	private int chqNoTo;
-	private int MicrNo;
+
+	private String requestBank;
+	private String bankAddress;
+	private long phoneNo;
+	private long mobileNo;
+	private long MicrNo;
+	private long transactionCode;
 	private String accountType;
+	List<BulkReqParticulars> bulkReqParticulars;
 
-	public int getSlNo() {
-		return slNo;
+	public String getRequestBank() {
+		return requestBank;
 	}
 
-	public void setSlNo(int slNo) {
-		this.slNo = slNo;
+	public void setRequestBank(String requestBank) {
+		this.requestBank = requestBank;
 	}
 
-	public String getNameToBePrinted() {
-		return nameToBePrinted;
+	public String getBankAddress() {
+		return bankAddress;
 	}
 
-	public void setNameToBePrinted(String nameToBePrinted) {
-		this.nameToBePrinted = nameToBePrinted;
+	public void setBankAddress(String bankAddress) {
+		this.bankAddress = bankAddress;
 	}
 
-	public long getAccountNo() {
-		return accountNo;
+	public long getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setAccountNo(long accountNo) {
-		this.accountNo = accountNo;
+	public void setPhoneNo(long phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
-	public String getOtherDetailsToBePrinted() {
-		return otherDetailsToBePrinted;
+	public long getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setOtherDetailsToBePrinted(String otherDetailsToBePrinted) {
-		this.otherDetailsToBePrinted = otherDetailsToBePrinted;
+	public void setMobileNo(long mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
-	public int getNoOfBooks() {
-		return noOfBooks;
+	public long getTransactionCode() {
+		return transactionCode;
 	}
 
-	public void setNoOfBooks(int noOfBooks) {
-		this.noOfBooks = noOfBooks;
+	public void setTransactionCode(long transactionCode) {
+		this.transactionCode = transactionCode;
 	}
 
-	public int getNoOfLeaves() {
-		return noOfLeaves;
-	}
-
-	public void setNoOfLeaves(int noOfLeaves) {
-		this.noOfLeaves = noOfLeaves;
-	}
-
-	public int getChqNoFrom() {
-		return chqNoFrom;
-	}
-
-	public void setChqNoFrom(int chqNoFrom) {
-		this.chqNoFrom = chqNoFrom;
-	}
-
-	public int getChqNoTo() {
-		return chqNoTo;
-	}
-
-	public void setChqNoTo(int chqNoTo) {
-		this.chqNoTo = chqNoTo;
-	}
-
-	public int getMicrNo() {
+	public long getMicrNo() {
 		return MicrNo;
 	}
 
-	public void setMicrNo(int micrNo) {
+	public void setMicrNo(long micrNo) {
 		MicrNo = micrNo;
 	}
 
@@ -90,6 +68,15 @@ public class BulkReqVO {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public List<BulkReqParticulars> getBulkReqParticulars() {
+		if(bulkReqParticulars==null)bulkReqParticulars=new ArrayList<>();
+		return bulkReqParticulars;
+	}
+
+	public void setBulkReqParticulars(List<BulkReqParticulars> bulkReqParticulars) {
+		this.bulkReqParticulars = bulkReqParticulars;
 	}
 
 }

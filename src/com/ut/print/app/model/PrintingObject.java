@@ -15,7 +15,7 @@ public class PrintingObject {
 	}
 
 	public static enum PRINTTYPE {
-		DIRECTPRINT, ALTERNATEPRINT;
+		DIRECTPRINT, ALTERNATEPRINT,EXCELIMPORT_PRINT;
 
 		private PRINTTYPE() {
 		}

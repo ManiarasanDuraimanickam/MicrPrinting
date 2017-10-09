@@ -4,14 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.ut.print.check.aligment_position_serialize;
 
-@Component
-@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PrintingContent {
 	public String getFirstMicr() {
 		return this.FirstMicr;
