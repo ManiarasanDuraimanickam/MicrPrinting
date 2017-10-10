@@ -439,8 +439,17 @@ public class Print extends AbstractPage {
 		this.jMenuBar1.setForeground(new Color(255, 255, 255));
 
 		this.jMenu1.setText("File");
+		this.jMenuItemBulkPrint.setIcon(Utils.getImageIcon("/iMAGE/Excel-icon.png"));
+		this.jMenuItemBulkPrint.setText("Excel Import");
+		this.jMenuItemBulkPrint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				Print.this.jMenuItemBulkPrintActionPerformed(evt);
+			}
+		});
+		this.jMenu1.add(this.jMenuItemBulkPrint);
 
 		this.jMenuItem3.setText("Exit");
+		this.jMenuItem3.setIcon(Utils.getImageIcon("/iMAGE/exit.png"));
 		this.jMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				Print.this.jMenuItem3ActionPerformed(evt);
@@ -478,20 +487,6 @@ public class Print extends AbstractPage {
 			}
 		});
 		this.jMenu3.add(this.JmenuPrepareAlternate);
-
-		this.jMenuItemBulkPrint.setIcon(Utils.getImageIcon("/iMAGE/Excel-icon.png"));
-		this.jMenuItemBulkPrint.setText("Excel Import");
-		this.jMenuItemBulkPrint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				Print.this.jMenuItemBulkPrintActionPerformed(evt);
-			}
-		});
-		this.jMenu3.add(this.jMenuItemBulkPrint);
-		
-		
-		
-		
-		
 		this.jMenuBar1.add(this.jMenu3);
 
 		setJMenuBar(this.jMenuBar1);
@@ -520,7 +515,7 @@ public class Print extends AbstractPage {
 	}
 
 	private void jMenuItem3ActionPerformed(ActionEvent evt) {
-		int reply = JOptionPane.showConfirmDialog(null, "You close the Application", "Close Application", 0);
+		int reply = JOptionPane.showConfirmDialog(jPanel1, "You close the Application", "Close Application", 0);
 		if (reply == 0) {
 			System.exit(0);
 		}
