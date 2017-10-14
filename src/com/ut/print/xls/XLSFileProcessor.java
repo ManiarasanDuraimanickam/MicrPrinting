@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,8 +25,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import com.ut.print.check.AbstractPage;
-import com.ut.print.check.Print;
-import java.awt.Insets;
 
 public class XLSFileProcessor extends AbstractPage {
 
@@ -83,7 +80,7 @@ public class XLSFileProcessor extends AbstractPage {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		//lblNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		panel.add(lblNewLabel);
-		JFileChooser fileChooser = new JFileChooser();
+		
 
 		// panel_1.add(fileChooser);
 
@@ -120,7 +117,7 @@ public class XLSFileProcessor extends AbstractPage {
 		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setApproveButtonText("Upload");
 				fileChooser.setDialogTitle("Select the File");
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -195,7 +192,6 @@ public class XLSFileProcessor extends AbstractPage {
 				btnNewButton_1.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnBack.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//new Print().setVisible(true);
