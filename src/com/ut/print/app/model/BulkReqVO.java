@@ -1,17 +1,19 @@
 package com.ut.print.app.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BulkReqVO {
 
+	private boolean updateBulkReqVO = true;
 	private String requestBank;
-	private String bankAddress;
-	private long phoneNo;
-	private long mobileNo;
+	private List<String> sideAddress;
+	private List<String> centerAddress;
 	private long MicrNo;
+	private long bankCode1;
 	private long transactionCode;
-	private String accountType;
+	private String ifscCode;
 	List<BulkReqParticulars> bulkReqParticulars;
 
 	public String getRequestBank() {
@@ -20,30 +22,6 @@ public class BulkReqVO {
 
 	public void setRequestBank(String requestBank) {
 		this.requestBank = requestBank;
-	}
-
-	public String getBankAddress() {
-		return bankAddress;
-	}
-
-	public void setBankAddress(String bankAddress) {
-		this.bankAddress = bankAddress;
-	}
-
-	public long getPhoneNo() {
-		return phoneNo;
-	}
-
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-
-	public long getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(long mobileNo) {
-		this.mobileNo = mobileNo;
 	}
 
 	public long getTransactionCode() {
@@ -62,21 +40,60 @@ public class BulkReqVO {
 		MicrNo = micrNo;
 	}
 
-	public String getAccountType() {
-		return accountType;
+	public long getBankCode1() {
+		return bankCode1;
 	}
 
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setBankCode1(long bankCode1) {
+		this.bankCode1 = bankCode1;
 	}
 
 	public List<BulkReqParticulars> getBulkReqParticulars() {
-		if(bulkReqParticulars==null)bulkReqParticulars=new ArrayList<>();
+		if (bulkReqParticulars == null)
+			bulkReqParticulars = new LinkedList<>();
 		return bulkReqParticulars;
 	}
 
 	public void setBulkReqParticulars(List<BulkReqParticulars> bulkReqParticulars) {
 		this.bulkReqParticulars = bulkReqParticulars;
+	}
+
+	public List<String> getSideAddress() {
+		if (null == sideAddress) {
+			sideAddress = new LinkedList<>();
+		}
+		return sideAddress;
+	}
+
+	public void setSideAddress(List<String> sideAddress) {
+		this.sideAddress = sideAddress;
+	}
+
+	public List<String> getCenterAddress() {
+		if (null == centerAddress) {
+			centerAddress = new LinkedList<>();
+		}
+		return centerAddress;
+	}
+
+	public void setCenterAddress(List<String> centerAddress) {
+		this.centerAddress = centerAddress;
+	}
+
+	public String getIfscCode() {
+		return ifscCode;
+	}
+
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
+
+	public boolean isUpdateBulkReqVO() {
+		return updateBulkReqVO;
+	}
+
+	public void setUpdateBulkReqVO(boolean updateBulkReqVO) {
+		this.updateBulkReqVO = updateBulkReqVO;
 	}
 
 }

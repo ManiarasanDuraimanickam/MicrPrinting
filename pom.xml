@@ -55,11 +55,15 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-			</plugin>
+			</plugin> <!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+				<version>2.3</version> <configuration> <archive> <manifest> <addClasspath>true</addClasspath> 
+				<mainClass>com.ut.print.check.Login</mainClass> <classpathPrefix>CheckDetailsPrinting-0.0.1-SNAPSHOT_lib/</classpathPrefix> 
+				</manifest> </archive> <source>1.8</source> <target>1.8</target> </configuration> 
+				</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3</version>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -67,10 +71,29 @@
 							<mainClass>com.ut.print.check.Login</mainClass>
 						</manifest>
 					</archive>
-					<source>1.8</source>
-					<target>1.8</target>
+
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>

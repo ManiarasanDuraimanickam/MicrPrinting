@@ -1,19 +1,25 @@
 package com.ut.print.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class CommonJDBCRepo {
-	
+
 	public CommonJDBCRepo() {
-		
+
 	}
+
+	private ResultSetExtractorToMap resultSetExtractorToMap = new ResultSetExtractorToMap();
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -22,8 +28,8 @@ public class CommonJDBCRepo {
 
 		String query = "select * from credentials where UserId=? and Password=?";
 
-		Map<String, Object> userCredentials = (Map<String, Object>) this.jdbcTemplate.queryForMap(query,
-				new Object[] { user, pass });
+		Map<String, Object> userCredentials = (Map<String, Object>) this.jdbcTemplate.query(query,
+				new Object[] { user, pass }, resultSetExtractorToMap);
 
 		if (userCredentials != null && userCredentials.get("UserId") != null)
 			return true;
@@ -41,8 +47,8 @@ public class CommonJDBCRepo {
 
 	public Map<String, Object> getBank(String bankName) {
 		String query = "select * from bankaddress where bankname=? and status=1";
-		Map<String, Object> bankDetails = (Map<String, Object>) this.jdbcTemplate.queryForMap(query,
-				new Object[] { bankName });
+		Map<String, Object> bankDetails = (Map<String, Object>) this.jdbcTemplate.query(query,
+				new Object[] { bankName }, resultSetExtractorToMap);
 		return bankDetails;
 	}
 
@@ -78,5 +84,29 @@ public class CommonJDBCRepo {
 		String sql = "update bankaddress set status=0 where bankname=?";
 		int updateSttaus = this.jdbcTemplate.update(sql, new Object[] { bank });
 		return updateSttaus > 0 ? true : false;
+	}
+
+	private class ResultSetExtractorToMap implements ResultSetExtractor<Map<String, Object>> {
+
+		@Override
+		public Map<String, Object> extractData(ResultSet rs) throws SQLException, DataAccessException {
+			Map<String, Object> dataStore = new HashMap<>();
+			String[] columns = getColumnsNames(rs);
+			while (rs.next()) {
+				for (String col : columns) {
+					dataStore.put(col, rs.getObject(col));
+				}
+			}
+			return dataStore;
+		}
+
+		private String[] getColumnsNames(ResultSet rs) throws SQLException {
+			String[] col = new String[rs.getMetaData().getColumnCount()];
+			for (int i = 0; i < col.length; i++) {
+				col[i] = rs.getMetaData().getColumnName(i+1);
+			}
+			return col;
+		}
+
 	}
 }
