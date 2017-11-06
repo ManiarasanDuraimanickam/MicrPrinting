@@ -87,6 +87,7 @@ public class PrintDirectBulkCheque implements Printable {
 		int micr_x = 0;
 		int micr_y = 0;
 		int Acc_len = 0;
+		int ifsc_codeHeg = 0, ifsc_codeLen = 0;
 		side_x = Integer
 				.parseInt(((aligment_position_serialize) this.printContent.getAli_ser().get(0)).getSd_Addr_leg11());
 		side_y = Integer
@@ -125,6 +126,8 @@ public class PrintDirectBulkCheque implements Printable {
 		AccType_len = AccType_len - AccType_length - 1;
 		int AccType_heg = Integer
 				.parseInt(((aligment_position_serialize) this.printContent.getAli_ser().get(0)).getAccountType_heg());
+		ifsc_codeHeg = Integer.parseInt(this.printContent.getAli_ser().get(0).getIfscCodeHeight());
+		ifsc_codeLen = Integer.parseInt(this.printContent.getAli_ser().get(0).getIfscCodeLen());
 		int micrstart_y = 234;
 		int repeart_y = 264;
 		int micrstart_imgy = 226;
@@ -142,6 +145,7 @@ public class PrintDirectBulkCheque implements Printable {
 		g.drawString(this.printContent.getCenteraddress4(), center_x, center_y3);
 		g.setFont(f4);
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg);
+		g.drawString(this.printContent.getIfscCode(), ifsc_codeLen, ifsc_codeHeg);
 		g.setFont(f3);
 		int newLineCount = Org_heg;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {
@@ -185,6 +189,7 @@ public class PrintDirectBulkCheque implements Printable {
 		g.setFont(f4);
 
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y);
+		g.drawString(this.printContent.getIfscCode(), ifsc_codeLen, ifsc_codeHeg+repeart_y);
 		g.setFont(f3);
 		int newLineCount1 = Org_heg + repeart_y;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {
@@ -225,6 +230,7 @@ public class PrintDirectBulkCheque implements Printable {
 
 		g.setFont(f4);
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y * 2);
+		g.drawString(this.printContent.getIfscCode(), ifsc_codeLen, ifsc_codeHeg+repeart_y * 2);
 		g.setFont(f3);
 		int newLineCount2 = Org_heg + repeart_y * 2;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {

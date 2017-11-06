@@ -53,6 +53,8 @@ public class aligment_position_serialize implements Serializable {
 	private String AccountType_len;
 	private String AccountType_heg;
 	private String orgCharLen;
+	private String ifscCodeLen;
+	private String ifscCodeHeight;
 
 	public String getSd_Addr_leg11() {
 		return this._sd_Addr_leg11;
@@ -300,5 +302,21 @@ public class aligment_position_serialize implements Serializable {
 
 	public void setOrgCharLen(String orgCharLen) {
 		this.orgCharLen = orgCharLen;
+	}
+
+	public String getIfscCodeLen() {
+		return ifscCodeLen;
+	}
+
+	public void setIfscCodeLen(String ifscCodeLen) {
+		this.ifscCodeLen = ifscCodeLen;
+	}
+
+	public String getIfscCodeHeight() {
+		return ifscCodeHeight;
+	}
+
+	public void setIfscCodeHeight(String ifscCodeHeight) {
+		this.ifscCodeHeight = ifscCodeHeight;
 	}
 }

@@ -161,6 +161,7 @@ public class XLSReader {
 		// printContent.setBankcode1(this.txtbankcode1.getText().trim());
 		printContent.setBankcode2("" + bulkReqVO.getTransactionCode());
 		printContent.setAccNo(bulkReqVO.getBulkReqParticulars().get(index).getAccountNo()>0 ?""+bulkReqVO.getBulkReqParticulars().get(index).getAccountNo():"");
+		printContent.setIfscCode(bulkReqVO.getIfscCode()!=null ? bulkReqVO.getIfscCode():"");
 		if (bulkReqVO.getBulkReqParticulars().get(index).getOtherDetailsToBePrinted() == null
 				|| bulkReqVO.getBulkReqParticulars().get(index).getOtherDetailsToBePrinted().isEmpty()) {
 			printContent.setAccHolderName(bulkReqVO.getBulkReqParticulars().get(index).getNameToBePrinted());

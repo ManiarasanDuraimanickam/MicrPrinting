@@ -60,6 +60,10 @@ public class PositionAlignment_setting extends AbstractPage {
 	private JLabel jLabel37;
 	private JLabel jLabel51;
 	private JLabel jLabel52;
+	private JLabel jLabel_Ifsc;
+	private JLabel jLabel_Ifsc_Heg;
+	private JLabel jLabel_Ifsc_Lef;
+
 	private JPanel jPanel1;
 	private JPanel jPanel2;
 	private JPanel jPanel3;
@@ -68,6 +72,7 @@ public class PositionAlignment_setting extends AbstractPage {
 	private JPanel jPanel6;
 	private JPanel jPanel7;
 	private JPanel jPanel8;
+	private JPanel jPanel_Ifsc;
 	private JTextField lbl_AccNo_height;
 	private JTextField lbl_AccNo_length;
 	private JTextField lbl_AccountType_height;
@@ -85,6 +90,8 @@ public class PositionAlignment_setting extends AbstractPage {
 	private JTextField lbl_sideaddress_btSpace;
 	private JTextField lbl_sideaddress_height;
 	private JTextField lbl_sideaddress_length;
+	private JTextField lbl_ifsccode_length;
+	private JTextField lbl_ifsccode_height;
 	private JSlider slider_AccNoHeg;
 	private JSlider slider_AccNoLen;
 	private JSlider slider_AccountTypeHeg;
@@ -102,6 +109,8 @@ public class PositionAlignment_setting extends AbstractPage {
 	private JSlider slider_sideAddressGap;
 	private JSlider slider_sideHeigth;
 	private JSlider slider_sideLength;
+	private JSlider slider_ifsccodeLength;
+	private JSlider slider_ifsccodeHeight;
 
 	public PositionAlignment_setting() {
 		TitleImage();
@@ -208,6 +217,11 @@ public class PositionAlignment_setting extends AbstractPage {
 					this.slider_AccountTypeLen.setValue(Integer.parseInt(AccountType_Len));
 					this.slider_AccountTypeHeg.setValue(Integer.parseInt(AccountType_Heg));
 					this.slider_OrganisationCharLen.setValue(Integer.parseInt(OrgCharLen));
+
+					this.slider_ifsccodeLength.setValue(Integer.parseInt(ali_ser.getIfscCodeLen().trim()));
+					this.lbl_ifsccode_length.setText(ali_ser.getIfscCodeLen());
+					this.slider_ifsccodeHeight.setValue(Integer.parseInt(ali_ser.getIfscCodeHeight().trim()));
+					this.lbl_ifsccode_height.setText(ali_ser.getIfscCodeHeight());
 					obj_in.close();
 					fout.close();
 				} else {
@@ -223,7 +237,8 @@ public class PositionAlignment_setting extends AbstractPage {
 	}
 
 	/**
-	 *the function use to create a default setting value
+	 * the function use to create a default setting value
+	 * 
 	 * @param alignment_file
 	 * @throws IOException
 	 */
@@ -273,6 +288,9 @@ public class PositionAlignment_setting extends AbstractPage {
 		ali_ser.setAccountType_len("240");
 		ali_ser.setAccountType_heg("210");
 		ali_ser.setOrgCharLen("40");
+
+		ali_ser.setIfscCodeHeight("413");
+		ali_ser.setIfscCodeLen("30");
 
 		String filename = alignment_file + "\\position_default.txt";
 		FileOutputStream fout = new FileOutputStream(filename);
@@ -356,6 +374,36 @@ public class PositionAlignment_setting extends AbstractPage {
 		this.lbl_AccountType_length = new JTextField();
 		this.lbl_AccountType_height = new JTextField();
 
+		this.jLabel_Ifsc = new JLabel();
+		jLabel_Ifsc_Lef = new JLabel();
+		jLabel_Ifsc_Heg = new JLabel();
+		this.lbl_ifsccode_height = new JTextField();
+		this.lbl_ifsccode_length = new JTextField();
+		this.slider_ifsccodeHeight = new JSlider();
+		this.slider_ifsccodeLength = new JSlider();
+		jPanel_Ifsc = new JPanel();
+
+		this.jPanel_Ifsc.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(42, 188, 217)));
+		this.slider_ifsccodeLength.setBackground(new Color(42, 188, 217));
+		this.slider_ifsccodeLength.setFont(new Font("Times New Roman", 0, 12));
+		this.slider_ifsccodeLength.setForeground(new Color(255, 51, 204));
+		this.slider_ifsccodeLength.setMaximum(500);
+		this.slider_ifsccodeLength.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent evt) {
+				PositionAlignment_setting.this.slider_IfsccodeLengthStateChanged(evt);
+			}
+
+		});
+		this.slider_ifsccodeHeight.setBackground(new Color(42, 188, 217));
+		this.slider_ifsccodeHeight.setFont(new Font("Times New Roman", 0, 12));
+		this.slider_ifsccodeHeight.setForeground(new Color(255, 51, 204));
+		this.slider_ifsccodeHeight.setMaximum(500);
+		this.slider_ifsccodeHeight.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent evt) {
+				PositionAlignment_setting.this.slider_IfsccodeHeightStateChanged(evt);
+			}
+
+		});
 		/*
 		 * setDefaultCloseOperation(3); setAutoRequestFocus(false);
 		 * setUndecorated(true);
@@ -952,6 +1000,54 @@ public class PositionAlignment_setting extends AbstractPage {
 										.addComponent(this.jLabel35, -1, -1, 32767)
 										.addComponent(this.slider_AccountTypeHeg, -2, -1, -2)))
 						.addContainerGap(-1, 32767)));
+		// -----------------Ifsc code layout-----------------------------------------//
+
+		this.jLabel_Ifsc.setFont(new Font("Times New Roman", 0, 18));
+		this.jLabel_Ifsc.setForeground(new Color(255, 0, 0));
+		this.jLabel_Ifsc.setText("IFSC Code");
+
+		this.jLabel_Ifsc_Lef.setFont(new Font("Times New Roman", 0, 14));
+		this.jLabel_Ifsc_Lef.setForeground(new Color(153, 0, 0));
+		this.jLabel_Ifsc_Lef.setText("Left Align");
+
+		this.jLabel_Ifsc_Heg.setFont(new Font("Times New Roman", 0, 14));
+		this.jLabel_Ifsc_Heg.setForeground(new Color(153, 0, 0));
+		this.jLabel_Ifsc_Heg.setText("Top Align");
+
+		GroupLayout jpGroupLayout_Ifsc = new GroupLayout(jPanel_Ifsc);
+		this.jPanel_Ifsc.setLayout(jpGroupLayout_Ifsc);
+		jpGroupLayout_Ifsc.setHorizontalGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jpGroupLayout_Ifsc.createSequentialGroup()
+						.addGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(jpGroupLayout_Ifsc.createSequentialGroup().addComponent(this.jLabel_Ifsc_Lef)
+										.addGap(10, 10, 10).addComponent(this.slider_ifsccodeLength, -2, 148, -2)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(this.lbl_ifsccode_length, -2, 43, -2).addGap(0, 0, 32767))
+								.addGroup(jpGroupLayout_Ifsc.createSequentialGroup()
+										.addComponent(this.jLabel_Ifsc_Heg, -2, 64, -2).addGap(2, 2, 2)
+										.addComponent(this.slider_ifsccodeHeight, -2, 0, 32767)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(this.lbl_ifsccode_height, -2, 43, -2)))
+						.addContainerGap())
+				.addGroup(jpGroupLayout_Ifsc.createSequentialGroup().addGap(79, 79, 79).addComponent(jLabel_Ifsc)
+						.addContainerGap(-1, 32767)));
+		jpGroupLayout_Ifsc.setVerticalGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(jpGroupLayout_Ifsc.createSequentialGroup().addComponent(jLabel_Ifsc, -2, 20, -2)
+						.addGap(18, 18, 18)
+						.addGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+										.addComponent(this.jLabel_Ifsc_Lef, -1, -1, 32767)
+										.addComponent(this.slider_ifsccodeLength, -2, 17, -2))
+								.addComponent(this.lbl_ifsccode_length, -2, -1, -2))
+						.addGap(27, 27, 27)
+						.addGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(this.lbl_ifsccode_height, -2, -1, -2)
+								.addGroup(jpGroupLayout_Ifsc.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+										.addComponent(this.jLabel_Ifsc_Heg, -1, -1, 32767)
+										.addComponent(this.slider_ifsccodeHeight, -2, -1, -2)))
+						.addContainerGap(-1, 32767)));
+
+		// ------------------ifsc code layout end-------------------------------------//
 		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
 		this.jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -976,8 +1072,10 @@ public class PositionAlignment_setting extends AbstractPage {
 												.addComponent(this.btn_alignmentDefault_position).addGap(18, 18, 18)
 												.addComponent(this.btn_setAligment).addGap(18, 18, 18)
 												.addComponent(this.btn_cancelPanel))
-								.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jPanel7, -2, 270, -2)
-										.addGap(0, 0, 32767)))
+								.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addComponent(this.jPanel_Ifsc, -2, 270, -2)// .addGap(18, 18, 18)
+												.addComponent(this.jPanel7, -2, -1, -2).addGap(0, 0, 32767))))
 								.addContainerGap()))));
 
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -992,7 +1090,10 @@ public class PositionAlignment_setting extends AbstractPage {
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(this.jPanel5, -1, -1, 32767).addComponent(this.jPanel6, -1, -1, 32767)
 								.addComponent(this.jPanel4, -1, -1, 32767))
-						.addGap(8, 8, 8).addComponent(this.jPanel7, -2, -1, -2).addGap(4, 4, 4)
+						.addGap(8, 8, 8)
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false))
+						.addComponent(this.jPanel_Ifsc, -1, -1, 32767)// .addGap(4, 4, 4)
+						.addComponent(this.jPanel7, -1, -1, 32767).addGap(4, 4, 4)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(this.btn_cancelPanel).addComponent(this.btn_setAligment)
 								.addComponent(this.btn_alignmentDefault_position))));
@@ -1111,6 +1212,8 @@ public class PositionAlignment_setting extends AbstractPage {
 
 			ali_ser.setAccountType_len(AccountType_Len);
 			ali_ser.setAccountType_heg(AccountType_Heg);
+			ali_ser.setIfscCodeHeight(lbl_ifsccode_height.getText().trim());
+			ali_ser.setIfscCodeLen(lbl_ifsccode_length.getText().trim());
 			String file_location = home_path + Save_location;
 
 			String filename = file_location + "\\Current_setting.txt";
@@ -1319,6 +1422,15 @@ public class PositionAlignment_setting extends AbstractPage {
 		this.lbl_Organisation_charLen.setText("" + length);
 	}
 
+	private void slider_IfsccodeLengthStateChanged(ChangeEvent evt) {
+		int length = this.slider_ifsccodeLength.getValue();
+		this.lbl_ifsccode_length.setText("" + length);
+	}
+
+	private void slider_IfsccodeHeightStateChanged(ChangeEvent evt) {
+		int length = this.slider_ifsccodeHeight.getValue();
+		this.lbl_ifsccode_height.setText("" + length);
+	}
 	/*
 	 * public static void main(String[] args) { try { for
 	 * (javax.swing.UIManager.LookAndFeelInfo info :

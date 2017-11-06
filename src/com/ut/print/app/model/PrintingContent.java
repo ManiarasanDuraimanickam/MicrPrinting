@@ -35,6 +35,7 @@ public class PrintingContent {
 	private String accOrganisation = null;
 	private String AccountType = null;
 	private String FirstMicr = null;
+	private String ifscCode;
 
 	public String getSideaddress1() {
 		return this.sideaddress1;
@@ -178,5 +179,13 @@ public class PrintingContent {
 
 	public void setAli_ser(List<aligment_position_serialize> ali_ser) {
 		this.ali_ser = ali_ser;
+	}
+
+	public String getIfscCode() {
+		return ifscCode;
+	}
+
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
 	}
 }
