@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -222,6 +223,7 @@ public class PositionAlignment_setting extends AbstractPage {
 					this.lbl_ifsccode_length.setText(ali_ser.getIfscCodeLen());
 					this.slider_ifsccodeHeight.setValue(Integer.parseInt(ali_ser.getIfscCodeHeight().trim()));
 					this.lbl_ifsccode_height.setText(ali_ser.getIfscCodeHeight());
+
 					obj_in.close();
 					fout.close();
 				} else {
@@ -404,17 +406,14 @@ public class PositionAlignment_setting extends AbstractPage {
 			}
 
 		});
-		/*
-		 * setDefaultCloseOperation(3); setAutoRequestFocus(false);
-		 * setUndecorated(true);
-		 */
+
 		setDefaultCloseOperation(3);
 		setTitle("Alignment Setting");
 		// setMaximumSize(new Dimension(800, 800));
 		// setMinimumSize(new Dimension(700, 700));
-		setUndecorated(true);
+		// setUndecorated(true);
 		// setPreferredSize(new Dimension(870, 700));
-		setResizable(false);
+		// setResizable(true);
 
 		this.jPanel1.setBackground(new Color(111, 166, 255));
 		this.jPanel1.setBorder(BorderFactory.createBevelBorder(0));
@@ -1067,6 +1066,12 @@ public class PositionAlignment_setting extends AbstractPage {
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addComponent(this.jPanel6, -2, 270, -2)
 												.addComponent(this.jPanel8, -2, -1, -2)))
+								// ------
+								.addGroup(GroupLayout.Alignment.TRAILING,
+										jPanel1Layout.createSequentialGroup().addComponent(this.jPanel_Ifsc, -2, -1, -2)
+												.addGap(18, 18, 18).addComponent(this.jPanel7, -2, -1, -2)
+												.addGap(18, 28, 32767))
+								// -----
 								.addGroup(GroupLayout.Alignment.TRAILING,
 										jPanel1Layout.createSequentialGroup().addGap(0, 0, 32767)
 												.addComponent(this.btn_alignmentDefault_position).addGap(18, 18, 18)
@@ -1074,7 +1079,7 @@ public class PositionAlignment_setting extends AbstractPage {
 												.addComponent(this.btn_cancelPanel))
 								.addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
 										.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-												.addComponent(this.jPanel_Ifsc, -2, 270, -2)// .addGap(18, 18, 18)
+												.addComponent(this.jPanel_Ifsc, -2, 270, -2).addGap(18, 18, 18)
 												.addComponent(this.jPanel7, -2, -1, -2).addGap(0, 0, 32767))))
 								.addContainerGap()))));
 
@@ -1091,9 +1096,9 @@ public class PositionAlignment_setting extends AbstractPage {
 								.addComponent(this.jPanel5, -1, -1, 32767).addComponent(this.jPanel6, -1, -1, 32767)
 								.addComponent(this.jPanel4, -1, -1, 32767))
 						.addGap(8, 8, 8)
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false))
-						.addComponent(this.jPanel_Ifsc, -1, -1, 32767)// .addGap(4, 4, 4)
-						.addComponent(this.jPanel7, -1, -1, 32767).addGap(4, 4, 4)
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(this.jPanel_Ifsc, -1, -1, -2)// .addGap(4, 4, 4)
+								.addComponent(this.jPanel7, -1, -1, 32767))// .addGap(4, 4, 4)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(this.btn_cancelPanel).addComponent(this.btn_setAligment)
 								.addComponent(this.btn_alignmentDefault_position))));
@@ -1431,6 +1436,7 @@ public class PositionAlignment_setting extends AbstractPage {
 		int length = this.slider_ifsccodeHeight.getValue();
 		this.lbl_ifsccode_height.setText("" + length);
 	}
+
 	/*
 	 * public static void main(String[] args) { try { for
 	 * (javax.swing.UIManager.LookAndFeelInfo info :
