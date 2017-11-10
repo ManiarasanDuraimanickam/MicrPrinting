@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ut.print.check.PositionAlignment_setting;
 import com.ut.print.check.aligment_position_serialize;
 
 public class Utils {
@@ -49,8 +50,8 @@ public class Utils {
 		String java_home = System.getProperty("user.home");
 		String alignment_file = java_home + "\\Cheque_MICRPrinting\\alignment";
 
-		String filename = alignment_file + "\\Current_setting.txt";
-		String default_filename = alignment_file + "\\position_default.txt";
+		String filename = alignment_file + "\\"+PositionAlignment_setting.CURRENT_SETTING_FILE;
+		String default_filename = alignment_file + "\\"+PositionAlignment_setting.DEFAULT_SETTING_FILE;
 
 		File file_cur = new File(filename);
 		File file_default = new File(default_filename);

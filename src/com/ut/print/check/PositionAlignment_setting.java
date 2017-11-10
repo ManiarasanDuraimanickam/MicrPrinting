@@ -32,6 +32,8 @@ public class PositionAlignment_setting extends AbstractPage {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final String CURRENT_SETTING_FILE = "Current_setting_V2.txt";
+	public static final String DEFAULT_SETTING_FILE="position_default_V2.txt";
 	private static final Log log = LogFactory.getLog(PositionAlignment_setting.class.getName());
 	private JButton btn_alignmentDefault_position;
 	private JButton btn_cancelPanel;
@@ -137,7 +139,7 @@ public class PositionAlignment_setting extends AbstractPage {
 			String alignment_file = user_home + "\\Cheque_MICRPrinting\\alignment";
 
 			File file1 = new File(alignment_file);
-			File file = new File(alignment_file + "\\Current_setting.txt");
+			File file = new File(alignment_file + "\\"+CURRENT_SETTING_FILE);
 			if (!file1.exists()) {
 				file1.mkdirs();
 			}
@@ -148,7 +150,7 @@ public class PositionAlignment_setting extends AbstractPage {
 				FileInputStream fout = null;
 				ObjectInputStream obj_in = null;
 
-				String filename = alignment_file + "\\Current_setting.txt";
+				String filename = alignment_file + "\\"+CURRENT_SETTING_FILE;
 				File file_cur = new File(filename);
 				if (file_cur.exists()) {
 					fout = new FileInputStream(filename);
@@ -294,7 +296,7 @@ public class PositionAlignment_setting extends AbstractPage {
 		ali_ser.setIfscCodeHeight("413");
 		ali_ser.setIfscCodeLen("30");
 
-		String filename = alignment_file + "\\position_default.txt";
+		String filename = alignment_file + "\\"+DEFAULT_SETTING_FILE;
 		FileOutputStream fout = new FileOutputStream(filename);
 		ObjectOutputStream obj_out = new ObjectOutputStream(fout);
 		obj_out.writeObject(ali_ser);
@@ -1221,7 +1223,7 @@ public class PositionAlignment_setting extends AbstractPage {
 			ali_ser.setIfscCodeLen(lbl_ifsccode_length.getText().trim());
 			String file_location = home_path + Save_location;
 
-			String filename = file_location + "\\Current_setting.txt";
+			String filename = file_location + "\\"+CURRENT_SETTING_FILE;
 
 			FileOutputStream fout = new FileOutputStream(filename);
 			Throwable localThrowable2 = null;
@@ -1254,7 +1256,7 @@ public class PositionAlignment_setting extends AbstractPage {
 			String user_home = System.getProperty("user.home");
 			String alignment_file = user_home + "\\Cheque_MICRPrinting\\alignment";
 			System.out.println(alignment_file);
-			String filename = alignment_file + "\\position_default.txt";
+			String filename = alignment_file + "\\"+DEFAULT_SETTING_FILE;
 			File file = new File(filename);
 			if (!file.exists()) {
 				javax.swing.JOptionPane.showMessageDialog(null, "File Not Found.. Can't be Update.");
