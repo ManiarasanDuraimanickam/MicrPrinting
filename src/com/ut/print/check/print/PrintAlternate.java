@@ -23,7 +23,7 @@ public class PrintAlternate implements Printable {
 	}
 
 	public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
-		try {
+		//try {
 			if (pageIndex > 0) {
 				return 1;
 			}
@@ -211,9 +211,9 @@ public class PrintAlternate implements Printable {
 				g.drawImage(img, micr_x7, micrstart_imgy3, 7, 8, null);
 			}
 			g.drawString(this.printContent.getBankcode2(), micr_x8, micrstart_y3);
-		} catch (RuntimeException e) {
-			System.out.println("Error on PrintAlternate page===" + e.getMessage());
-		}
+		//} catch (RuntimeException e) {
+		//	System.out.println("Error on PrintAlternate page===" + e.getMessage());
+	//	}
 		return 0;
 	}
 }

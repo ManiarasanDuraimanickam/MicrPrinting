@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -97,6 +98,8 @@ public class Print extends AbstractPage {
 	private JTextField txtcenteraddress3;
 	private JTextField txtcenteraddress4;
 	private JTextField txtnumfrom;
+	private JTextField txtIFSCCode;
+	private JLabel jlblIFSCode;
 
 	private CommonJDBCRepo commonJDBCRepo;
 
@@ -105,7 +108,7 @@ public class Print extends AbstractPage {
 	private AddNewBank addNewBank;
 
 	private PrepareAlternate prepareAlternate;
-	
+
 	private XLSFileProcessor xlsFileProcessor;
 
 	public Print() {
@@ -119,7 +122,7 @@ public class Print extends AbstractPage {
 		alignment_setting = new PositionAlignment_setting();
 		addNewBank = new AddNewBank();
 		prepareAlternate = new PrepareAlternate();
-		xlsFileProcessor=new XLSFileProcessor();
+		xlsFileProcessor = new XLSFileProcessor();
 		initComponents();
 		TitleImage();
 		GetBankList();
@@ -177,9 +180,10 @@ public class Print extends AbstractPage {
 		this.jMenu3 = new JMenu();
 		this.jMenuItem1 = new JMenuItem();
 		this.jMenuItem2 = new JMenuItem();
-		jMenuItemBulkPrint=new JMenuItem();
+		jMenuItemBulkPrint = new JMenuItem();
 		this.JmenuPrepareAlternate = new JMenuItem();
-
+		txtIFSCCode = new JTextField();
+		jlblIFSCode = new JLabel();
 		setDefaultCloseOperation(3);
 		setTitle("Cheque MICR printing");
 		setBackground(new Color(51, 51, 255));
@@ -317,6 +321,10 @@ public class Print extends AbstractPage {
 		this.jLabel21.setForeground(new Color(255, 255, 255));
 		this.jLabel21.setText("Account Type");
 
+		this.jlblIFSCode.setFont(new Font("Times New Roman", 0, 18));
+		this.jlblIFSCode.setForeground(new Color(255, 255, 255));
+		this.jlblIFSCode.setText("IFS CODE");
+
 		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
 		this.jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -342,7 +350,13 @@ public class Print extends AbstractPage {
 												-2)))
 						.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jLabel17, -2, 132, -2)
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
-								.addComponent(this.txtAccNo, -2, 150, -2)))
+								.addComponent(this.txtAccNo, -2, 150, -2))
+						////new ifsc code added
+						.addGap(42, 42, 42)
+						.addGroup(jPanel1Layout.createSequentialGroup().addComponent(this.jlblIFSCode, -2, 132, -2)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+								.addComponent(this.txtIFSCCode, -2, 150, -2))
+						)
 						.addGap(77, 77, 77)
 						.addGroup(
 								jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -394,7 +408,8 @@ public class Print extends AbstractPage {
 												.addGroup(
 														jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																.addComponent(this.jButton1, -2, 76, -2)
-																.addComponent(this.txtAccountType, -2, 150, -2))))
+																.addComponent(this.txtAccountType, -2, 150, -2))
+												))
 						.addContainerGap(304, 32767)));
 
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -432,8 +447,14 @@ public class Print extends AbstractPage {
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(this.jLabel17).addComponent(this.txtAccNo, -2, -1, -2)
-								.addComponent(this.jLabel21).addComponent(this.txtAccountType, -2, -1, -2))
-						.addGap(30, 30, 30).addComponent(this.jButton1, -2, 38, -2).addContainerGap(31, 32767)));
+								.addComponent(this.jLabel21).addComponent(this.txtAccountType, -2, -1, -2)
+								)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jlblIFSCode).addComponent(this.txtIFSCCode, -2, -1, -2)
+								.addComponent(this.jButton1, -2, 38, -2)
+								)
+						.addContainerGap(31, 32767)));
 
 		this.jMenuBar1.setBackground(new Color(77, 137, 233));
 		this.jMenuBar1.setForeground(new Color(255, 255, 255));
@@ -499,7 +520,7 @@ public class Print extends AbstractPage {
 		layout.setVerticalGroup(
 				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jPanel1, -1, 423, 32767));
 
-		setSize(new java.awt.Dimension(897, 471));
+		setSize(new java.awt.Dimension(897, 520));
 		setLocationRelativeTo(null);
 	}
 
@@ -576,8 +597,8 @@ public class Print extends AbstractPage {
 		String java_home = System.getProperty("user.home");
 		String alignment_file = java_home + "\\Cheque_MICRPrinting\\alignment";
 
-		String filename = alignment_file + "\\"+PositionAlignment_setting.CURRENT_SETTING_FILE;
-		String default_filename = alignment_file + "\\"+PositionAlignment_setting.DEFAULT_SETTING_FILE;
+		String filename = alignment_file + "\\" + PositionAlignment_setting.CURRENT_SETTING_FILE;
+		String default_filename = alignment_file + "\\" + PositionAlignment_setting.DEFAULT_SETTING_FILE;
 
 		File file_cur = new File(filename);
 		File file_default = new File(default_filename);
@@ -630,6 +651,7 @@ public class Print extends AbstractPage {
 		this.printContent.setAccHolderName(this.txtHolderName.getText().trim());
 		this.printContent.setAccOrganisation(this.txtHolderOrg.getText().trim());
 		this.printContent.setAccountType(this.txtAccountType.getText().trim());
+		this.printContent.setIfscCode(this.txtIFSCCode.getText().trim());
 		this.printData.getPrintingContent().add(this.printContent);
 		this.printData.setPrinttype(PrintingObject.PRINTTYPE.DIRECTPRINT);
 	}
@@ -638,16 +660,25 @@ public class Print extends AbstractPage {
 		getRootPane().setWindowDecorationStyle(8);
 		setIconImages(Utils.getTitleImage());
 	}
-	/*
-	 * public static void main(String[] args) { try { for
-	 * (javax.swing.UIManager.LookAndFeelInfo info :
-	 * UIManager.getInstalledLookAndFeels()) { if ("Nimbus".equals(info.getName()))
-	 * { javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } }
-	 * catch (ClassNotFoundException | InstantiationException |
-	 * IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-	 * LOG.error(ex); }
-	 * 
-	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { new
-	 * Print().setVisible(true); } }); }
-	 */
+
+	public static void main(String[] args) {
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| javax.swing.UnsupportedLookAndFeelException ex) {
+			LOG.error(ex);
+		}
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new Print().setVisible(true);
+			}
+		});
+	}
+
 }

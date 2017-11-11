@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -124,6 +125,12 @@ public class PrepareAlternate extends AbstractPage {
 	private JTextField slipThirdMicr4;
 	private JTextField slipThirdSide1;
 	private JTextField slipThirdSide2;
+	private JTextField txtIFSCode1;
+	private JTextField txtIFSCode2;
+	private JTextField txtIFSCode3;
+	private JLabel jLblIFSC1;
+	private JLabel jLblIFSC2;
+	private JLabel jLblIFSC3;
 
 	private CommonJDBCRepo commonJDBCRepo;
 
@@ -216,6 +223,13 @@ public class PrepareAlternate extends AbstractPage {
 		this.SecondSlipOrg_name = new JTextField();
 		this.SecondSlipHolder_name = new JTextField();
 		this.SecondSlipAcc_type = new JTextField();
+		this.txtIFSCode1 = new JTextField();
+		this.txtIFSCode2 = new JTextField();
+		this.txtIFSCode3 = new JTextField();
+		jLblIFSC1 = new JLabel();
+		jLblIFSC2 = new JLabel();
+		jLblIFSC3 = new JLabel();
+
 		this.jLabel30 = new JLabel();
 		this.SelectBankName = new JComboBox();
 		this.Btnprint = new JButton();
@@ -282,6 +296,15 @@ public class PrepareAlternate extends AbstractPage {
 		this.jLabel95.setFont(new Font("Times New Roman", 0, 18));
 		this.jLabel95.setForeground(new Color(255, 255, 255));
 		this.jLabel95.setText("Account Type");
+		this.jLblIFSC1.setFont(new Font("Times New Roman", 0, 14));
+		this.jLblIFSC1.setForeground(new Color(255, 255, 255));
+		this.jLblIFSC1.setText("IFSC");
+		this.jLblIFSC2.setFont(new Font("Times New Roman", 0, 14));
+		this.jLblIFSC2.setForeground(new Color(255, 255, 255));
+		this.jLblIFSC2.setText("IFSC");
+		this.jLblIFSC3.setFont(new Font("Times New Roman", 0, 14));
+		this.jLblIFSC3.setForeground(new Color(255, 255, 255));
+		this.jLblIFSC3.setText("IFSC");
 
 		GroupLayout jPanel2Layout = new GroupLayout(this.jPanel2);
 		this.jPanel2.setLayout(jPanel2Layout);
@@ -308,10 +331,11 @@ public class PrepareAlternate extends AbstractPage {
 										.addComponent(this.jLabel74, -2, 136, -2)
 										.addComponent(this.jLabel86, -2, 137, -2)
 										.addComponent(this.jLabel76, -2, 129, -2)))
-						.addGroup(jPanel2Layout.createSequentialGroup().addComponent(this.slipFirstMicr1, -2, 126, -2)
-								.addGap(45, 45, 45).addComponent(this.slipFirstMicr2, -2, 132, -2).addGap(71, 71, 71)
-								.addComponent(this.slipFirstMicr3, -2, 131, -2)))
-						.addGap(56, 56, 56)
+						.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jLblIFSC1, -2, 50, -2)
+								.addComponent(txtIFSCode1, -2, 80, -2).addGap(15, 15, 15).addComponent(this.slipFirstMicr1, -2, 126, -2)
+								.addGap(20, 20, 20).addComponent(this.slipFirstMicr2, -2, 132, -2).addGap(30, 30, 30)
+								.addComponent(this.slipFirstMicr3, -2, 70, -2)))
+						.addGap(30, 30, 30)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 								.addComponent(this.slipFirstMicr4, -1, 132, 32767)
 								.addComponent(this.slipFirstCenter2, GroupLayout.Alignment.TRAILING)
@@ -349,8 +373,9 @@ public class PrepareAlternate extends AbstractPage {
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(this.slipFirstMicr4, -2, -1, -2)
 										.addComponent(this.slipFirstMicr3, -2, -1, -2)
-										.addComponent(this.slipFirstMicr2, -2, -1, -2))
-								.addComponent(this.slipFirstMicr1))
+										.addComponent(this.slipFirstMicr2, -2, -1, -2)
+								.addComponent(this.slipFirstMicr1)
+								.addComponent(jLblIFSC1).addComponent(txtIFSCode1)))
 						.addContainerGap(45, 32767)));
 		this.jPanel3.setBackground(new Color(111, 166, 255));
 		this.jPanel3.setBorder(BorderFactory.createEtchedBorder());
@@ -724,8 +749,8 @@ public class PrepareAlternate extends AbstractPage {
 	private void BtnprintActionPerformed(ActionEvent evt) {
 		String java_home = System.getProperty("user.home");
 		String alignment_file = java_home + "\\Cheque_MICRPrinting\\alignment";
-		String filename = alignment_file + "\\"+PositionAlignment_setting.CURRENT_SETTING_FILE;
-		String default_filename = alignment_file + "\\"+PositionAlignment_setting.DEFAULT_SETTING_FILE;
+		String filename = alignment_file + "\\" + PositionAlignment_setting.CURRENT_SETTING_FILE;
+		String default_filename = alignment_file + "\\" + PositionAlignment_setting.DEFAULT_SETTING_FILE;
 
 		File file_cur = new File(filename);
 		File file_default = new File(default_filename);
@@ -772,8 +797,8 @@ public class PrepareAlternate extends AbstractPage {
 		this.printContent.getAli_ser().clear();
 		this.printData.getPrintingContent().clear();
 		this.printContent.getAli_ser().add(this.ali_ser);
-		java.net.URL urlimage1 = getClass().getResource("MICR121.gif");
-		java.net.URL urlimage2 = getClass().getResource("MICR122.gif");
+		java.net.URL urlimage1 = Utils.getImageURLFromDefaultLocation("MICR121.gif");
+		java.net.URL urlimage2 = Utils.getImageURLFromDefaultLocation("MICR122.gif");
 
 		this.printContent.setUrlimage1(urlimage1);
 		this.printContent.setUrlimage2(urlimage2);
@@ -962,17 +987,25 @@ public class PrepareAlternate extends AbstractPage {
 		this.ThirdSlipHolder_name.setText(Holder_Name);
 	}
 
-	/*
-	 * public static void main(String[] args) { try { for (UIManager.LookAndFeelInfo
-	 * info : UIManager.getInstalledLookAndFeels()) { if
-	 * ("Nimbus".equals(info.getName())) {
-	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch
-	 * (ClassNotFoundException | InstantiationException | IllegalAccessException |
-	 * javax.swing.UnsupportedLookAndFeelException ex) {
-	 * java.util.logging.Logger.getLogger(PrepareAlternate.class.getName()).log(java
-	 * .util.logging.Level.SEVERE, null, ex); }
-	 * 
-	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { new
-	 * PrepareAlternate().setVisible(true); } }); }
-	 */
+	public static void main(String[] args) {
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(PrepareAlternate.class.getName()).log(java.util.logging.Level.SEVERE,
+					null, ex);
+		}
+
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new PrepareAlternate().setVisible(true);
+			}
+		});
+	}
+
 }
