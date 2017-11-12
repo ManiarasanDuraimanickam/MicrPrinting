@@ -315,7 +315,7 @@ public class PrepareAlternate extends AbstractPage {
 								.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jLabel94)
 								.addComponent(this.jLabel93, -2, 126, -2).addComponent(this.jLabel92, -2, 114, -2)
 								.addComponent(this.jLabel87, -2, 126, -2).addComponent(this.jLabel73, -2, 107, -2))
-								.addGap(45, 45, 45)
+								.addGap(39, 39, 39)
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addComponent(this.slipFirstSide1, GroupLayout.Alignment.TRAILING, -2, 132, -2)
 										.addComponent(this.slipFirstSide2, -2, 132, -2)
@@ -324,25 +324,26 @@ public class PrepareAlternate extends AbstractPage {
 												-2)
 										.addComponent(this.FirstSlipHolderName, GroupLayout.Alignment.TRAILING, -2, 132,
 												-2))
-								.addGap(71, 71, 71)
+								.addGap(68)
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addComponent(this.jLabel95, -2, 126, -2)
 										.addComponent(this.jLabel77, -2, 136, -2)
 										.addComponent(this.jLabel74, -2, 136, -2)
 										.addComponent(this.jLabel86, -2, 137, -2)
-										.addComponent(this.jLabel76, -2, 129, -2)))
-						.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jLblIFSC1, -2, 50, -2)
-								.addComponent(txtIFSCode1, -2, 80, -2).addGap(15, 15, 15).addComponent(this.slipFirstMicr1, -2, 126, -2)
-								.addGap(20, 20, 20).addComponent(this.slipFirstMicr2, -2, 132, -2).addGap(30, 30, 30)
-								.addComponent(this.slipFirstMicr3, -2, 70, -2)))
+										.addComponent(this.jLabel76, -2, 129, -2))))
 						.addGap(30, 30, 30)
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-								.addComponent(this.slipFirstMicr4, -1, 132, 32767)
-								.addComponent(this.slipFirstCenter2, GroupLayout.Alignment.TRAILING)
-								.addComponent(this.slipFirstCenter3).addComponent(this.slipFirstCenter4)
-								.addComponent(this.FirstSlipAccType)
+								.addComponent(this.slipFirstCenter2, -2, 160, -2).addComponent(this.slipFirstCenter3)
+								.addComponent(this.slipFirstCenter4).addComponent(this.FirstSlipAccType)
 								.addComponent(this.slipFirstCenter1, GroupLayout.Alignment.TRAILING))
-						.addContainerGap(-1, 32767)));
+						.addContainerGap(-1, 32767))
+				.addGroup(jPanel2Layout.createSequentialGroup().addGap(40, 40, 40).addComponent(jLblIFSC1, -2, 50, -2)
+						.addComponent(txtIFSCode1, -2, 130, -2)// .addGap(15, 15, 15)
+						.addComponent(this.slipFirstMicr1, -2, 130, -2)// .addGap(20, 20, 20)
+						.addComponent(this.slipFirstMicr2, -2, 130, -2)// .addGap(30, 30, 30)
+						.addComponent(this.slipFirstMicr3, -2, 130, -2).addComponent(this.slipFirstMicr4, -2, 130, -2))
+
+		);
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -373,9 +374,8 @@ public class PrepareAlternate extends AbstractPage {
 								.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(this.slipFirstMicr4, -2, -1, -2)
 										.addComponent(this.slipFirstMicr3, -2, -1, -2)
-										.addComponent(this.slipFirstMicr2, -2, -1, -2)
-								.addComponent(this.slipFirstMicr1)
-								.addComponent(jLblIFSC1).addComponent(txtIFSCode1)))
+										.addComponent(this.slipFirstMicr2, -2, -1, -2).addComponent(this.slipFirstMicr1)
+										.addComponent(jLblIFSC1).addComponent(txtIFSCode1)))
 						.addContainerGap(45, 32767)));
 		this.jPanel3.setBackground(new Color(111, 166, 255));
 		this.jPanel3.setBorder(BorderFactory.createEtchedBorder());
@@ -444,10 +444,8 @@ public class PrepareAlternate extends AbstractPage {
 										.addComponent(this.slipThirdSide1, -2, 132, -2)
 										.addComponent(this.ThirdSlipAcc_no, -2, 132, -2)
 										.addComponent(this.ThirdSlipOrg_name, -2, 132, -2)
-										.addComponent(this.ThirdSlipHolder_name, -2, 132, -2)))
-						.addGroup(jPanel3Layout.createSequentialGroup().addComponent(this.slipThirdMicr1, -2, 126, -2)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
-								.addComponent(this.slipThirdMicr2, -2, 132, -2)))
+										.addComponent(this.ThirdSlipHolder_name, -2, 132, -2))))
+
 						.addGap(68, 68, 68)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -456,17 +454,26 @@ public class PrepareAlternate extends AbstractPage {
 										.addComponent(this.jLabel79, -2, 136, -2)
 										.addComponent(this.jLabel84, -2, 136, -2)
 										.addComponent(this.jLabel85, -2, 129, -2))
-								.addGroup(jPanel3Layout.createSequentialGroup()
-										.addComponent(this.slipThirdMicr3, -2, 131, -2).addGap(8, 8, 8)))
-						.addGap(56, 56, 56)
+						/*
+						 * .addGroup(jPanel3Layout.createSequentialGroup()
+						 * .addComponent(this.slipThirdMicr3, -2, 131, -2).addGap(8, 8, 8))
+						 */).addGap(56, 56, 56)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-								.addComponent(this.slipThirdMicr4, -1, 140, 32767)
-								.addComponent(this.slipThirdCenter4, GroupLayout.Alignment.TRAILING)
+								.addComponent(this.slipThirdCenter4, -2,170,-2)
 								.addComponent(this.slipThirdCenter3, GroupLayout.Alignment.TRAILING)
 								.addComponent(this.slipThirdCenter2, GroupLayout.Alignment.TRAILING)
 								.addComponent(this.slipThirdCenter1, GroupLayout.Alignment.TRAILING)
 								.addComponent(this.ThirdSlipAcc_type))
-						.addGap(29, 29, 29)));
+						.addGap(29, 29, 29))
+				.addGroup(jPanel3Layout.createSequentialGroup().addGap(40, 40, 40).
+						addComponent(this.jLblIFSC3,-2,50,-2)//.addGap(40, 40, 40)
+						.addComponent(this.txtIFSCode3, -2, 130, -2)//.addGap(40, 40, 40)
+						.addComponent(this.slipThirdMicr1, -2, 130, -2)
+						// .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767)
+						.addComponent(this.slipThirdMicr2, -2, 130, -2)//.addGap(40, 40, 40)
+						.addComponent(this.slipThirdMicr3, -2, 130, -2)//.addGap(40, 40, 40)
+						.addComponent(this.slipThirdMicr4, -1, 130, -2)//.addGap(40, 40, 40)
+						));
 
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup()
@@ -503,11 +510,12 @@ public class PrepareAlternate extends AbstractPage {
 								.addComponent(this.ThirdSlipAcc_type, -2, -1, -2))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.slipThirdMicr4, -2, -1, -2)
 								.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(this.slipThirdMicr2, -2, -1, -2)
-										.addComponent(this.slipThirdMicr1, -2, -1, -2))
-								.addComponent(this.slipThirdMicr3, -2, -1, -2))
+										.addComponent(this.slipThirdMicr1, -2, -1, -2).addComponent(this.jLblIFSC3)
+										.addComponent(this.txtIFSCode3, -2, -1, -2)
+										.addComponent(this.slipThirdMicr3, -2, -1, -2)
+										.addComponent(this.slipThirdMicr4, -2, -1, -2)))
 						.addGap(21, 32, 32767)));
 
 		this.jPanel4.setBackground(new Color(111, 166, 255));
@@ -568,30 +576,29 @@ public class PrepareAlternate extends AbstractPage {
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(this.jLabel90, -2, 126, -2).addComponent(this.jLabel80, -2, 126, -2))
 						.addComponent(this.jLabel97, -2, 126, -2).addComponent(this.jLabel98, -2, 126, -2)
-						.addComponent(this.slipSecondMicr1, -2, 126, -2)).addGap(45, 45, 45)
+				// .addComponent(this.slipSecondMicr1, -2, 80, -2)
+				).addGap(20, 20, 30)
+
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(this.slipSecondSide2, -2, 132, -2)
 								.addComponent(this.slipSecondSide1, -2, 132, -2)
 								.addComponent(this.SecondSlipAcc_no, -2, 132, -2)
 								.addComponent(this.SecondSlipOrg_name, -2, 132, -2)
-								.addComponent(this.SecondSlipHolder_name, -2, 132, -2)
-								.addComponent(this.slipSecondMicr2, -2, 132, -2))
+								.addComponent(this.SecondSlipHolder_name, -2, 132, -2))
 						.addGap(72, 72, 72)
 						.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel4Layout.createSequentialGroup()
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addGroup(jPanel4Layout
 														.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-														.addComponent(this.slipSecondMicr3,
-																GroupLayout.Alignment.LEADING)
 														.addComponent(this.jLabel99, GroupLayout.Alignment.LEADING, -1,
 																126, 32767))
 												.addComponent(this.jLabel83, -2, 136, -2))
 										.addGap(55, 55, 55)
-										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+										.addGroup(jPanel4Layout
+												.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addComponent(this.SecondSlipAcc_type, -1, 142, 32767)
-												.addComponent(this.slipSecondCenter4)
-												.addComponent(this.slipSecondMicr4)))
+												.addComponent(this.slipSecondCenter4)))
 								.addGroup(jPanel4Layout.createSequentialGroup()
 										.addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addComponent(this.jLabel82, -2, 136, -2)
@@ -602,7 +609,13 @@ public class PrepareAlternate extends AbstractPage {
 												.addComponent(this.slipSecondCenter3, GroupLayout.Alignment.TRAILING)
 												.addComponent(this.slipSecondCenter2, GroupLayout.Alignment.TRAILING)
 												.addComponent(this.slipSecondCenter1, GroupLayout.Alignment.TRAILING))))
-						.addGap(29, 29, 29)));
+
+						.addGap(29, 29, 29))
+				.addGroup(jPanel4Layout.createSequentialGroup().addGap(40, 40, 40)
+						.addComponent(this.jLblIFSC2, -2, 50, -2).addComponent(this.txtIFSCode2, -2, 130, -2)
+						.addComponent(this.slipSecondMicr1, -2, 130, -2).addComponent(this.slipSecondMicr2, -2, 130, -2)
+						.addComponent(this.slipSecondMicr3, -2, 130, -2)
+						.addComponent(this.slipSecondMicr4, -2, 130, -2)));
 
 		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel4Layout.createSequentialGroup()
@@ -653,7 +666,8 @@ public class PrepareAlternate extends AbstractPage {
 								.addComponent(this.slipSecondMicr4, -2, -1, -2)
 								.addComponent(this.slipSecondMicr3, -2, -1, -2)
 								.addComponent(this.slipSecondMicr2, -2, -1, -2)
-								.addComponent(this.slipSecondMicr1, -2, -1, -2))
+								.addComponent(this.slipSecondMicr1, -2, -1, -2).addComponent(this.jLblIFSC2)
+								.addComponent(this.txtIFSCode2))
 						.addGap(0, 8, 32767)));
 
 		this.jLabel30.setFont(new Font("Times New Roman", 0, 14));
@@ -816,6 +830,7 @@ public class PrepareAlternate extends AbstractPage {
 		this.printContent.setAccOrganisation(this.FirstSlipOrgName.getText().trim());
 		this.printContent.setAccHolderName(this.FirstSlipHolderName.getText().trim());
 		this.printContent.setAccountType(this.FirstSlipAccType.getText().trim());
+		this.printContent.setIfscCode(this.txtIFSCode1.getText().trim());
 		this.printData.getPrintingContent().add(this.printContent);
 
 		this.printContent = new PrintingContent();
@@ -833,6 +848,7 @@ public class PrepareAlternate extends AbstractPage {
 		this.printContent.setAccOrganisation(this.SecondSlipOrg_name.getText().trim());
 		this.printContent.setAccHolderName(this.SecondSlipHolder_name.getText().trim());
 		this.printContent.setAccountType(this.SecondSlipAcc_type.getText().trim());
+		this.printContent.setIfscCode(this.txtIFSCode2.getText().trim());
 		this.printData.getPrintingContent().add(this.printContent);
 
 		this.printContent = new PrintingContent();
@@ -851,6 +867,7 @@ public class PrepareAlternate extends AbstractPage {
 		this.printContent.setAccOrganisation(this.ThirdSlipOrg_name.getText().trim());
 		this.printContent.setAccHolderName(this.ThirdSlipHolder_name.getText().trim());
 		this.printContent.setAccountType(this.ThirdSlipAcc_type.getText().trim());
+		this.printContent.setIfscCode(this.txtIFSCode3.getText().trim());
 		this.printData.getPrintingContent().add(this.printContent);
 		this.printData.setPrinttype(PrintingObject.PRINTTYPE.ALTERNATEPRINT);
 	}

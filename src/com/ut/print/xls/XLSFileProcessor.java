@@ -230,7 +230,7 @@ public class XLSFileProcessor extends AbstractPage {
 							messageLbl.setForeground(new Color(255, 0, 0));
 						}
 					} catch (Exception e1) {
-						messageLbl.setText("Error occured while upload a file " + e1.getMessage());
+						messageLbl.setText("Error occured-" + e1.getMessage());
 						messageLbl.setForeground(new Color(255, 0, 0));
 					}
 
@@ -248,8 +248,8 @@ public class XLSFileProcessor extends AbstractPage {
 		panel_1.setPreferredSize(new Dimension(700, 50));
 
 		messageLbl = new JLabel();
-		messageLbl.setMinimumSize(new Dimension(400, 200));
-		messageLbl.setSize(new Dimension(400, 200));
+		messageLbl.setMinimumSize(new Dimension(400, 300));
+		messageLbl.setSize(new Dimension(400, 300));
 		messageLbl.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		panel_1.add(messageLbl);
 		btnBack.addActionListener(new ActionListener() {

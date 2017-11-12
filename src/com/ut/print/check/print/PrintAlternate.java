@@ -93,6 +93,8 @@ public class PrintAlternate implements Printable {
 			AccType_len = AccType_len - AccType_length - 1;
 			int AccType_heg = Integer.parseInt(
 					((aligment_position_serialize) this.printContent.getAli_ser().get(0)).getAccountType_heg());
+			int ifsc_heg=Integer.parseInt(this.printContent.getAli_ser().get(0).getIfscCodeHeight());
+			int ifsc_Len=Integer.parseInt(this.printContent.getAli_ser().get(0).getIfscCodeLen());
 			int micrstart_y = 234;
 			int repeart_y = 264;
 			int micrstart_imgy = 226;
@@ -110,6 +112,7 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg);
 			g.setFont(f3);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg);
@@ -152,6 +155,7 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_2y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y);
 			g.setFont(f3);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg + repeart_y);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg + repeart_y);
@@ -190,6 +194,7 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_3y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y * 2);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y*2);
 			g.setFont(f3);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg + repeart_y * 2);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg + repeart_y * 2);
@@ -207,7 +212,7 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getBankcode(), micr_x4, micrstart_y3);
 			g.drawImage(img1, micr_x5, micrstart_imgy3, 7, 8, null);
 			if ((this.printContent.getBankcode1() != null) && (this.printContent.getBankcode1().length() > 0)) {
-				g.drawString(this.printContent.getBankcode2(), micr_x6, micrstart_y3);
+				g.drawString(this.printContent.getBankcode1(), micr_x6, micrstart_y3);
 				g.drawImage(img, micr_x7, micrstart_imgy3, 7, 8, null);
 			}
 			g.drawString(this.printContent.getBankcode2(), micr_x8, micrstart_y3);

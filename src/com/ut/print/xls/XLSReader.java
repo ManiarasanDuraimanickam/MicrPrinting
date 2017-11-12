@@ -94,7 +94,7 @@ public class XLSReader {
 						//reqParticulars.setSlNo(((Double) cell.getNumericCellValue()).intValue());
 						break;
 					case 2:
-						reqParticulars.setAccountNo(((Double) cell.getNumericCellValue()).longValue());
+					//	reqParticulars.setAccountNo(((Double) cell.getNumericCellValue()).longValue());
 						break;
 
 					case 4:
@@ -149,21 +149,20 @@ public class XLSReader {
 		java.net.URL urlimage2 = Utils.getImageURLFromDefaultLocation("MICR122.gif");
 		printContent.setUrlimage1(urlimage1);
 		printContent.setUrlimage2(urlimage2);
-		printContent.setSideaddress1(bulkReqVO.getSideAddress()!=null && bulkReqVO.getSideAddress().size()>0 ? bulkReqVO.getSideAddress().get(0):"");
-		printContent.setSideaddress2(bulkReqVO.getSideAddress()!=null && bulkReqVO.getSideAddress().size()>1 ? bulkReqVO.getSideAddress().get(1):"");
-		printContent.setCenteraddress1(bulkReqVO.getCenterAddress()!=null && bulkReqVO.getCenterAddress().size()>0?bulkReqVO.getCenterAddress().get(0):"");
-		printContent.setCenteraddress2(bulkReqVO.getCenterAddress()!=null && bulkReqVO.getCenterAddress().size()>1?bulkReqVO.getCenterAddress().get(1):"");
-		printContent.setCenteraddress3(bulkReqVO.getCenterAddress()!=null && bulkReqVO.getCenterAddress().size()>2?bulkReqVO.getCenterAddress().get(2):"");
-		printContent.setCenteraddress4(bulkReqVO.getCenterAddress()!=null && bulkReqVO.getCenterAddress().size()>3?bulkReqVO.getCenterAddress().get(3):"");
+		printContent.setSideaddress1(bulkReqVO.getBulkReqParticulars().get(index).getSideAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getSideAddress().size()>0 ? bulkReqVO.getBulkReqParticulars().get(index).getSideAddress().get(0):"");
+		printContent.setSideaddress2(bulkReqVO.getBulkReqParticulars().get(index).getSideAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getSideAddress().size()>1 ? bulkReqVO.getBulkReqParticulars().get(index).getSideAddress().get(1):"");
+		printContent.setCenteraddress1(bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().size()>0?bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().get(0):"");
+		printContent.setCenteraddress2(bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().size()>1?bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().get(1):"");
+		printContent.setCenteraddress3(bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().size()>2?bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().get(2):"");
+		printContent.setCenteraddress4(bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress()!=null && bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().size()>3?bulkReqVO.getBulkReqParticulars().get(index).getCenterAddress().get(3):"");
 		printContent.setNofrom("" + bulkReqVO.getBulkReqParticulars().get(index).getChqNoFrom());
 		printContent.setNumto("" + bulkReqVO.getBulkReqParticulars().get(index).getChqNoTo());
-		printContent.setBankcode("" + bulkReqVO.getMicrNo());
+		printContent.setBankcode(bulkReqVO.getBulkReqParticulars().get(index).getMicrNo()!=null?bulkReqVO.getBulkReqParticulars().get(index).getMicrNo():"");
 		// printContent.setBankcode1(this.txtbankcode1.getText().trim());
-		printContent.setBankcode2("" + bulkReqVO.getTransactionCode());
-		printContent.setAccNo(bulkReqVO.getBulkReqParticulars().get(index).getAccountNo()>0 ?""+bulkReqVO.getBulkReqParticulars().get(index).getAccountNo():"");
-		printContent.setIfscCode(bulkReqVO.getIfscCode()!=null ? bulkReqVO.getIfscCode():"");
-		if (bulkReqVO.getBulkReqParticulars().get(index).getOtherDetailsToBePrinted() == null
-				|| bulkReqVO.getBulkReqParticulars().get(index).getOtherDetailsToBePrinted().isEmpty()) {
+		printContent.setBankcode2(bulkReqVO.getBulkReqParticulars().get(index).getTransactionCode()!=null?bulkReqVO.getBulkReqParticulars().get(index).getTransactionCode():"");
+		printContent.setAccNo(bulkReqVO.getBulkReqParticulars().get(index).getAccountNo()!=null?bulkReqVO.getBulkReqParticulars().get(index).getAccountNo():"");
+		printContent.setIfscCode(bulkReqVO.getBulkReqParticulars().get(index).getIfscCode()!=null?bulkReqVO.getBulkReqParticulars().get(index).getIfscCode():"");
+		if (bulkReqVO.getBulkReqParticulars().get(index).getOtherDetailsToBePrinted().isEmpty()) {
 			printContent.setAccHolderName(bulkReqVO.getBulkReqParticulars().get(index).getNameToBePrinted());
 			printContent.setAccOrganisation("");
 		} else {
@@ -178,7 +177,7 @@ public class XLSReader {
 		if (cell.getStringCellValue().isEmpty() && cell.getStringCellValue().length() <= 0) {
 			return;
 		} else if (cell.getStringCellValue().trim().toUpperCase().endsWith("BANK")) {
-			bulkReqVO.setRequestBank(cell.getStringCellValue().trim());
+		//	bulkReqVO.setRequestBank(cell.getStringCellValue().trim());
 			return;
 		} /*else if (bulkReqVO.getRequestBank() != null && bulkReqVO.getBankAddress() == null) {
 			bulkReqVO.setBankAddress(cell.getStringCellValue().trim());
@@ -195,12 +194,12 @@ public class XLSReader {
 			bulkReqVO.setAccountType(currentRow.getCell(cell.getColumnIndex() + 1).getStringCellValue());
 			return;
 		}*/ else if (cell.getStringCellValue().trim().equalsIgnoreCase(ColumnNames.MICR.getColValue())) {
-			bulkReqVO.setMicrNo(
-					((Double) currentRow.getCell(cell.getColumnIndex() + 1).getNumericCellValue()).longValue());
+			//bulkReqVO.setMicrNo(
+			//		((Double) currentRow.getCell(cell.getColumnIndex() + 1).getNumericCellValue()).longValue());
 			return;
 		} else if (cell.getStringCellValue().trim().equalsIgnoreCase(ColumnNames.TRANSACTION_CODE.getColValue())) {
-			bulkReqVO.setTransactionCode(
-					((Double) currentRow.getCell(cell.getColumnIndex() + 1).getNumericCellValue()).longValue());
+		//	bulkReqVO.getBulkReqParticulars().get(index).setTransactionCode(
+		//			((Double) currentRow.getCell(cell.getColumnIndex() + 1).getNumericCellValue()).longValue());
 			return;
 		}
 	}

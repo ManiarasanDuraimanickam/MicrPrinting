@@ -3,6 +3,7 @@ package com.ut.print.xls;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.ut.print.app.model.BulkReqParticulars;
 import com.ut.print.app.model.BulkReqVO;
 import com.ut.print.dao.CommonJDBCRepo;
 import com.ut.print.exceptions.BankNotFoundException;
+import com.ut.print.exceptions.ColumnNull;
 import com.ut.print.xls.XLSReader.ColumnNames;
 
 public class JTableReader extends XLSReader {
@@ -87,18 +89,17 @@ public class JTableReader extends XLSReader {
 			reqParticulars = new BulkReqParticulars();
 			for (int j = 0; j < xlTable.getColumnModel().getColumnCount(); j++) {
 				buildBulkReqMO((String) xlTable.getValueAt(0, j), xlTable.getValueAt(count, j), bulkReqVO,
-						reqParticulars);
-				log.info(xlTable.getValueAt(0, j) + "=" + xlTable.getValueAt(count, j));
+						reqParticulars, count, j);
+				// log.info(xlTable.getValueAt(0, j) + "=" + xlTable.getValueAt(count, j));
 			}
-			bulkReqVO.setUpdateBulkReqVO(false);
 			bulkReqVO.getBulkReqParticulars().add(reqParticulars);
 		}
 		doPrint(bulkReqVO);
 		return false;
 	}
 
-	private void buildBulkReqMO(String header, Object colValue, BulkReqVO bulkReqVO,
-			BulkReqParticulars reqParticulars) {
+	private void buildBulkReqMO(String header, Object colValue, BulkReqVO bulkReqVO, BulkReqParticulars reqParticulars,
+			int rowNum, int columnNum) {
 		if (ColumnNames.SL_NO.getColValue().equalsIgnoreCase(header)
 				|| ColumnNames.DONOT_INCLUDE.getColValue().equalsIgnoreCase(header)
 				|| ColumnNames.PHONE.getColValue().equalsIgnoreCase(header)
@@ -106,65 +107,88 @@ public class JTableReader extends XLSReader {
 				|| ColumnNames.NO_OF_BOOKS.getColValue().equalsIgnoreCase(header)
 				|| ColumnNames.NO_OF_LEAVES.getColValue().equalsIgnoreCase(header)) {
 			return;
+
 		} else if (ColumnNames.ACCOUNT_NO.getColValue().equalsIgnoreCase(header)) {
-			reqParticulars.setAccountNo(Long.parseLong("" + colValue));
+			// if (colValue == null)throwNullExceptions("Account no found as null, verify
+			// Row-{0} and column -{1}", rowNum, columnNum);
+			reqParticulars.setAccountNo(colValue != null ? "" + colValue : "");
+
 		} else if (ColumnNames.BANK.getColValue().equalsIgnoreCase(header)) {
-			if (!bulkReqVO.isUpdateBulkReqVO())
-				return;
-			Map<String, Object> bankDetails = this.commonJDBCRepo.getBank(((String) colValue).trim());
-			buildBankAddressInfo(bankDetails, bulkReqVO);
+			if (colValue == null)
+				throwNullExceptions("Bank name found as null, verify the Row-{0} and column -{1}", rowNum, columnNum);
+			reqParticulars.setRequestBank(((String) colValue).trim());
+			setBankaddressDetails(bulkReqVO, reqParticulars);
+
 		} else if (ColumnNames.ACCOUNT_TYPE.getColValue().equalsIgnoreCase(header)) {
-			reqParticulars.setAccountType(getAccountType(bulkReqVO, colValue));
+			// if (colValue == null)throwNullExceptions("Account Type found as null, verify
+			// the Row-{0} and column -{1}", rowNum,columnNum);
+			reqParticulars.setAccountType(colValue != null ? (String) colValue : "");
+
 		} else if (ColumnNames.CHQ_NO_FROM.getColValue().equalsIgnoreCase(header)) {
+			if (colValue == null)
+				throwNullExceptions("Cheque From found as null, verify the Row-{0} and column -{1}", rowNum, columnNum);
 			reqParticulars.setChqNoFrom((int) colValue);
+
 		} else if (ColumnNames.CHQ_NO_TO.getColValue().equalsIgnoreCase(header)) {
+			if (colValue == null)
+				throwNullExceptions("Cheque To found as null, verify the Row-{0} and column -{1}", rowNum, columnNum);
 			reqParticulars.setChqNoTo((int) colValue);
+
 		} else if (ColumnNames.IFSC_CODE.getColValue().equalsIgnoreCase(header)) {
-			if (!bulkReqVO.isUpdateBulkReqVO())
-				return;
-			bulkReqVO.setIfscCode((String) colValue);
+			// if (colValue == null)throwNullExceptions("IFS code found as null, verify the
+			// Row-{0} and column -{1}", rowNum, columnNum);
+			reqParticulars.setIfscCode(colValue != null ? "" + colValue : "");
+
 		} else if (ColumnNames.MICR.getColValue().equalsIgnoreCase(header)) {
-			if (!bulkReqVO.isUpdateBulkReqVO())
-				return;
-			bulkReqVO.setMicrNo(Long.parseLong("" + colValue));
+			// if (colValue == null)throwNullExceptions("MICR found as null, verify the
+			// Row-{0} and column -{1}", rowNum, columnNum);
+			reqParticulars.setMicrNo(colValue != null ? "" + colValue : "");
+
 		} else if (ColumnNames.NAME.getColValue().equalsIgnoreCase(header)) {
-			reqParticulars.setNameToBePrinted((String) colValue);
+			reqParticulars.setNameToBePrinted(colValue != null ? (String) colValue : "");
+
 		} else if (ColumnNames.OTHER_DETAILS.getColValue().equalsIgnoreCase(header)) {
-			reqParticulars.setOtherDetailsToBePrinted((String) colValue);
+			reqParticulars.setOtherDetailsToBePrinted(colValue != null ? (String) colValue : "");
+
 		} else if (ColumnNames.TRANSACTION_CODE.getColValue().equalsIgnoreCase(header)) {
-			if (!bulkReqVO.isUpdateBulkReqVO())
-				return;
-			bulkReqVO.setTransactionCode(Long.parseLong("" + colValue));
+			// if (colValue == null)throwNullExceptions("Transaction code found as null,
+			// verify the Row-{0} and column -{1}", rowNum,columnNum);
+			reqParticulars.setTransactionCode(colValue != null ? "" + colValue : "");
 		}
 	}
 
-	private String getAccountType(BulkReqVO bulkReqVO, Object colValue) {
-		if (null == colValue) {
-			return "";
-		} else {
-			String accType = (String) colValue;
-			if (!accType.isEmpty()) {
-				return accType;
-			} else {
-				if (bulkReqVO.getBulkReqParticulars().size() > 0) {
-					return bulkReqVO.getBulkReqParticulars().get(0).getAccountType();
-				} else {
-					return "";
-				}
+	private void setBankaddressDetails(BulkReqVO bulkReqVO, BulkReqParticulars reqParticulars) {
+		if (!bulkReqVO.getBulkReqParticulars().isEmpty()) {
+			String lastBankname = bulkReqVO.getBulkReqParticulars().get(bulkReqVO.getBulkReqParticulars().size() - 1)
+					.getRequestBank();
+			if (lastBankname.equalsIgnoreCase(reqParticulars.getRequestBank())) {
+				reqParticulars.setSideAddress(bulkReqVO.getBulkReqParticulars()
+						.get(bulkReqVO.getBulkReqParticulars().size() - 1).getSideAddress());
+				reqParticulars.setCenterAddress(bulkReqVO.getBulkReqParticulars()
+						.get(bulkReqVO.getBulkReqParticulars().size() - 1).getCenterAddress());
+				return;
 			}
 		}
+		Map<String, Object> bankDetails = this.commonJDBCRepo.getBank(reqParticulars.getRequestBank());
+		buildBankAddressInfo(bankDetails, bulkReqVO, reqParticulars);
+
 	}
 
-	private void buildBankAddressInfo(Map<String, Object> bankDetails, BulkReqVO bulkReqVO) {
+	private ColumnNull throwNullExceptions(String msg, int row, int col) {
+		String formatedMsg = MessageFormat.format(msg, row, col);
+		throw new ColumnNull(formatedMsg);
+	}
+
+	private void buildBankAddressInfo(Map<String, Object> bankDetails, BulkReqVO bulkReqVO,
+			BulkReqParticulars reqParticulars) {
 		if (null == bankDetails || bankDetails.isEmpty())
 			throw new BankNotFoundException("Incorrect Bank Name, Please verify that");
-		bulkReqVO.getSideAddress().add((String) bankDetails.get("side1"));
-		bulkReqVO.getSideAddress().add((String) bankDetails.get("side2"));
-		bulkReqVO.getCenterAddress().add((String) bankDetails.get("center1"));
-		bulkReqVO.getCenterAddress().add((String) bankDetails.get("center2"));
-		bulkReqVO.getCenterAddress().add((String) bankDetails.get("center3"));
-		bulkReqVO.getCenterAddress().add((String) bankDetails.get("center4"));
-
+		reqParticulars.getSideAddress().add((String) bankDetails.get("side1"));
+		reqParticulars.getSideAddress().add((String) bankDetails.get("side2"));
+		reqParticulars.getCenterAddress().add((String) bankDetails.get("center1"));
+		reqParticulars.getCenterAddress().add((String) bankDetails.get("center2"));
+		reqParticulars.getCenterAddress().add((String) bankDetails.get("center3"));
+		reqParticulars.getCenterAddress().add((String) bankDetails.get("center4"));
 	}
 
 	public String getErrorMsg() {
