@@ -139,8 +139,8 @@ public class PrintDirectCheque implements Printable {
 		g.drawString(this.printContent.getCenteraddress4(), center_x, center_y3);
 		g.setFont(f4);
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg);
-		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg);
 		g.setFont(f3);
+		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg);
 		int newLineCount = Org_heg;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {
 			g.drawString(newLine, Org_len, newLineCount);
@@ -183,8 +183,8 @@ public class PrintDirectCheque implements Printable {
 		g.setFont(f4);
 
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y);
-		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg+ repeart_y);
 		g.setFont(f3);
+		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg+ repeart_y);
 		int newLineCount1 = Org_heg + repeart_y;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {
 			g.drawString(newLine, Org_len, newLineCount1);
@@ -224,8 +224,8 @@ public class PrintDirectCheque implements Printable {
 
 		g.setFont(f4);
 		g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y * 2);
-		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg+ repeart_y*2);
 		g.setFont(f3);
+		g.drawString(this.printContent.getIfscCode(), ifsc_len, ifsc_heg+ repeart_y*2);
 		int newLineCount2 = Org_heg + repeart_y * 2;
 		for (String newLine : this.printContent.getAccOrganisation().split("\n")) {
 			g.drawString(newLine, Org_len, newLineCount2);

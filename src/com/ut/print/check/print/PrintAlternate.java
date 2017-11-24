@@ -112,8 +112,8 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg);
-			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg);
 			g.setFont(f3);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg);
 			g.setFont(f3);
@@ -155,8 +155,8 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_2y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y);
-			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y);
 			g.setFont(f3);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg + repeart_y);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg + repeart_y);
 			g.setFont(f3);
@@ -194,8 +194,8 @@ public class PrintAlternate implements Printable {
 			g.drawString(this.printContent.getCenteraddress4(), center_x, center_3y3);
 			g.setFont(f4);
 			g.drawString(this.printContent.getAccNo(), Acc_len, Acc_heg + repeart_y * 2);
-			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y*2);
 			g.setFont(f3);
+			g.drawString(this.printContent.getIfscCode(), ifsc_Len, ifsc_heg+ repeart_y*2);
 			g.drawString(this.printContent.getAccOrganisation(), Org_len, Org_heg + repeart_y * 2);
 			g.drawString(this.printContent.getAccHolderName(), HolderName_len, HolderName_heg + repeart_y * 2);
 			g.setFont(f3);
